@@ -18,4 +18,16 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
+    /**
+     * About page action.
+     *
+     * @return Response
+     */
+    public function about()
+    {
+        return $this->render('default/about.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
 }

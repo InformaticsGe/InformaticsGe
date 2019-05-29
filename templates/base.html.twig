@@ -26,6 +26,7 @@
 </head>
 
 <body>
+{% set currentRoute = app.request.get('_route') %}
 <!--Navigation bar-->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -39,7 +40,8 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="{{ url('index') }}">მთავარი</a></li>
+                <li class="{{ currentRoute == 'index' ? 'active' : ''}}"><a href="{{ url('index') }}">მთავარი</a></li>
+                <li class="{{ currentRoute == 'about' ? 'active' : '' }}"><a href="{{ url('about') }}">ჩვენ</a></li>
             </ul>
         </div>
     </div>

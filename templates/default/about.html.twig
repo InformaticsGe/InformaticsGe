@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ჩვენ შესახებ{% endblock %}
+
+{% block body %}
+    <div class="col-md-12">
+        <div class="header-section text-center">
+            <h2>ჩვენ შესახებ</h2>
+            <p>გაიცანით <b>Informatics.ge</b></p>
+            <hr class="bottom-line">
+        </div>
+
+        <div class="col-sm-12 about">
+            <div class="col-sm-12 text-center">
+                <p><b>Informatics.ge</b> - პროგრამირების შესწავლისა და სპორტული პროგრამირების ვებ-გვერდი.</p>
+                <p>ეს არის პლატფორმა, რომელიც დაეხმარება დამწყებ პროგრამისტებს მომავალი პროფესიის დაუფლებაში
+                    ხოლო გამოცდილებს - შესაძლებლობების გაუმჯობესებაში.</p>
+                <br/>
+                <h3>ჩვენი გუნდი</h3>
+                <br/>
+            </div>
+        </div>
+
+        <div class="col-sm-12 team">
+            <div class="col-sm-12">
+                <div class="col-sm-4">
+                    <figure>
+                        <img class="img-circle" src="{{ asset('images/team/zaza.jpg') }}" width="200px" height="200px"
+                             alt="Zaza Gamezardashvili"/>
+                    </figure>
+                </div>
+                <div class="col-sm-8">
+                    <h3>
+                        ზაზა გამეზარდაშვილი
+                        <small>იდეის ავტორი</small>
+                    </h3>
+                    <p><b><i>საქართველოს ინფორმატიკის მოსწავლეთა ნაკრების თანალიდერი</i></b></p>
+
+                    <ul class="social-network social-circle">
+                        <li>
+                            <a href="https://www.facebook.com/zaza.gamezardashvili" target="_blank" class="icoFacebook"
+                               title="Facebook"><i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="col-sm-4">
+                    <figure>
+                        <img class="img-circle" src="{{ asset('images/team/abgeo.jpg') }}" width="200px" height="200px"
+                             alt="Temuri Takalandze"/>
+                    </figure>
+                </div>
+                <div class="col-sm-8">
+                    <h3>
+                        თემური თაკალანძე
+                        <small>ავტორი</small>
+                    </h3>
+                    <p><b><i>კავკასიის ტექნოლოგიების სკოლის (CST) სტუდენტი</i></b></p>
+                    <p>ამპარტავანი არ ვარ, მაგრამ ვვამაყობ ჩემი ამ ქმნილებით ))</p>
+
+                    <ul class="social-network social-circle">
+                        <li><a href="http://www.abgeo.ga/" target="_blank" class="icoWebsite" title="Website"><i
+                                        class="fa fa-globe"></i></a></li>
+                        <li><a href="https://github.com/ABGEO07" target="_blank" class="icoGithub" title="Github"><i
+                                        class="fa fa-github"></i></a></li>
+                        <li><a href="https://www.facebook.com/ABGEO07" target="_blank" class="icoFacebook"
+                               title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://twitter.com/ABGEO07" target="_blank" class="icoTwitter" title="Twitter"><i
+                                        class="fa fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 text-center">
+            <hr/>
+            <p>კითხვების არსებობის შემთხვევაში</p>
+
+            <a href="https://m.me/Informatics.ge" target="_blank">
+                <span>დაგვიკავშირდით</span><img src="{{ asset('images/fbm.png') }}" alt="Messenger" width="40">
+            </a>
+
+            <!-- Your customer chat code -->
+            <div class="fb-customerchat"
+                 attribution=setup_tool
+                 page_id="{{ getEnv('FB_PAGE_ID') }}"
+                 theme_color="#db3631"
+                 logged_in_greeting="მოგესალმებით! რით შეგვიძლია დაგეხმაროთ?"
+                 logged_out_greeting="მოგესალმებით! რით შეგვიძლია დაგეხმაროთ?">
+            </div>
+        </div>
+    </div>
+{% endblock %}
