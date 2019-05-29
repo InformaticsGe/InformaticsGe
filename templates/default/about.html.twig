@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ჩვენ შესახებ{% endblock %}
+{% block title %}{{ 'ჩვენ შესახებ'|trans }}{% endblock %}
 
 {% block body %}
     <div class="col-md-12">
         <div class="header-section text-center">
-            <h2>ჩვენ შესახებ</h2>
-            <p>გაიცანით <b>Informatics.ge</b></p>
+            <h2>{{ 'ჩვენ შესახებ'|trans }}</h2>
+            <p>{{ 'გაიცანით ჩვენი გუნდი'|trans }}</p>
             <hr class="bottom-line">
         </div>
 
@@ -16,7 +16,7 @@
                 <p>ეს არის პლატფორმა, რომელიც დაეხმარება დამწყებ პროგრამისტებს მომავალი პროფესიის დაუფლებაში
                     ხოლო გამოცდილებს - შესაძლებლობების გაუმჯობესებაში.</p>
                 <br/>
-                <h3>ჩვენი გუნდი</h3>
+                <h3>{{ 'ჩვენი გუნდი'|trans }}</h3>
                 <br/>
             </div>
         </div>
@@ -77,10 +77,10 @@
 
         <div class="col-sm-12 text-center">
             <hr/>
-            <p>კითხვების არსებობის შემთხვევაში</p>
+            <p>{{ 'კითხვების არსებობის შემთხვევაში'|trans }}</p>
 
             <a href="https://m.me/Informatics.ge" target="_blank">
-                <span>დაგვიკავშირდით</span><img src="{{ asset('images/fbm.png') }}" alt="Messenger" width="40">
+                <span>{{ 'დაგვიკავშირდით'|trans }}</span><img src="{{ asset('images/fbm.png') }}" alt="Messenger" width="40">
             </a>
 
             <!-- Your customer chat code -->
