@@ -1,5 +1,8 @@
+{% set current_route = app.request.get('_route') %}
+{% set current_locale = app.request.get('_locale') %}
+
 <!DOCTYPE html>
-<html lang="ka">
+<html lang="{{ current_locale }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,7 +29,6 @@
 </head>
 
 <body>
-{% set currentRoute = app.request.get('_route') %}
 <!--Navigation bar-->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -36,12 +38,31 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('index') }}">I<span>nformatics</span>.ge</a>
+
+            <div class="logo-with-lang-switcher">
+                <a class="navbar-brand" href="{{ url('index') }}">I<span>nformatics</span>.ge</a>
+
+                {% set query_params = app.request.query.all|url_encode is not empty ?
+                    '?' ~ app.request.query.all|url_encode : app.request.query.all|url_encode %}
+
+                {% if app.request.attributes.get('_locale') == 'en' %}
+                    <a href="{{ path(current_route, app.request.get('_route_params')|merge({'_locale': 'ka'})) ~ query_params }}"
+                       class="lang-item">
+                        <img src="{{ asset('images/lang-ka.png') }}" alt="KA"/>
+                    </a>
+                {% elseif app.request.attributes.get('_locale') == 'ka' %}
+                    <a href="{{ path(current_route, app.request.get('_route_params')|merge({'_locale': 'en'})) ~ query_params }}"
+                       class="lang-item">
+                        <img src="{{ asset('images/lang-en.png') }}" alt="EN"/>
+                    </a>
+                {% endif %}
+            </div>
+
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li class="{{ currentRoute == 'index' ? 'active' : ''}}"><a href="{{ url('index') }}">მთავარი</a></li>
-                <li class="{{ currentRoute == 'about' ? 'active' : '' }}"><a href="{{ url('about') }}">ჩვენ</a></li>
+                <li class="{{ current_route == 'index' ? 'active' : ''}}"><a href="{{ url('index') }}">{{ 'homepage'|trans }}</a></li>
+                <li class="{{ current_route == 'about' ? 'active' : '' }}"><a href="{{ url('about') }}">{{ 'we'|trans }}</a></li>
             </ul>
         </div>
     </div>
@@ -52,6 +73,30 @@
 <section class="section-padding">
     <div class="container">
         <div class="row">
+            <!--Facebook SDK-->
+            <div id="fb-root"></div>
+            <script>
+                window.fbAsyncInit = function() {
+                    FB.init({
+                        appId      : '{{ getEnv('FB_APP_ID') }}',
+                        cookie     : true,
+                        xfbml      : true,
+                        version    : 'v3.2'
+                    });
+
+                    FB.AppEvents.logPageView();
+                };
+
+                (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "https://connect.facebook.net/ka_GE/sdk.js#xfbml=1&version=v3.2&appId={{ getEnv('FB_APP_ID') }}&autoLogAppEvents=1";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            </script>
+            <!--/ Facebook SDK-->
+
             <!--Content-->
             {% block body %}{% endblock %}
             <!--/ Content-->
@@ -73,7 +118,7 @@
 <footer id="footer" class="footer">
     <div class="container text-center">
         <div class="partners">
-            <h2>ჩვენი პარტნიორები</h2>
+            <h2>{{ 'our_partners'|trans }}</h2>
             <section class="partner-logos slider">
                 <div class="slide">
                     <a href="http://kings.ge" target="_blank">
@@ -123,17 +168,17 @@
         </ul>
 
         <div class="credits">
-            <p>©2018-{{ 'now'|date('Y') }} Informatics.ge. All rights reserved</p>
-            <p><b>დრო სერვერზე: {{ 'now'|date("d.m.Y H:i:s") }}</b></p>
+            <p>©2018-{{ 'now'|date('Y') }} Informatics.ge. {{ 'all_rights_reserved'|trans }}</p>
+            <p><b>{{ 'server_time'|trans }}: {{ 'now'|date("d.m.Y H:i:s") }}</b></p>
         </div>
 
         <div class="links">
             <p>
-                <a href="#">ჩვენ</a> |
-                <a href="#">კონფიდენციალურობა</a> |
-                <a href="#">წესდება</a>
+                <a href="{{ url('about') }}">{{ 'about_us'|trans }}</a> |
+                <a href="#">{{ 'confidentiality'|trans }}</a> |
+                <a href="#">{{ 'terms_and_conditions'|trans }}</a>
             </p>
-            <p><a href="https://old.informatics.ge">Informatics.ge-ს ძველი ვერსია</a></p>
+            <p><a href="https://old.informatics.ge">{{ 'site_old_version'|trans }}</a></p>
             <p>
                 Create with <span style="color: red;">♥</span> By
                 <a href="http://www.abgeo.ga/" target="_blank">ABGEO</a>

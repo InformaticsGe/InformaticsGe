@@ -1,7 +1,15 @@
 index:
-    path: /
+    path: /{_locale}
     controller: App\Controller\DefaultController::index
+    defaults:
+        _locale: ka
+    requirements:
+        _locale:  ka|en
 
 about:
-    path: /about
+    path: /{_locale}/about
     controller: App\Controller\DefaultController::about
+    defaults:
+        _locale: ka
+    requirements:
+        _locale:  ka|en
