@@ -1266,3 +1266,17 @@ a.socialIcon:hover, .socialHoverClass {
 .copy-test:hover {
     background-color: #ffc0be;
 }
+
+.logo-with-lang-switcher .lang-item {
+    position: absolute;
+    top: 20px;
+    margin-left: 10px;
+}
+
+.logo-with-lang-switcher .lang-item:hover {
+    filter: hue-rotate(80deg);
+}
+
+.logo-with-lang-switcher .lang-item img {
+    width: 25px;
+}
