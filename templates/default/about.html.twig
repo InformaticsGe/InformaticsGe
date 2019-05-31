@@ -10,13 +10,13 @@
 #}
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'ჩვენ შესახებ'|trans }}{% endblock %}
+{% block title %}{{ 'about_us'|trans }}{% endblock %}
 
 {% block body %}
     <div class="col-md-12">
         <div class="header-section text-center">
-            <h2>{{ 'ჩვენ შესახებ'|trans }}</h2>
-            <p>{{ 'გაიცანით ჩვენი გუნდი'|trans }}</p>
+            <h2>{{ 'about_us'|trans }}</h2>
+            <p>{{ 'meet_our_team'|trans }}</p>
             <hr class="bottom-line">
         </div>
 
@@ -32,7 +32,7 @@
                         and for improve skills of experienced ones And improve skills of experienced ones.</p>
                 {% endif %}
                 <br/>
-                <h3>{{ 'ჩვენი გუნდი'|trans }}</h3>
+                <h3>{{ 'our_teaam'|trans }}</h3>
                 <br/>
             </div>
         </div>
@@ -109,10 +109,10 @@
 
         <div class="col-sm-12 text-center">
             <hr/>
-            <p>{{ 'კითხვების არსებობის შემთხვევაში'|trans }}</p>
+            <p>{{ 'if_you_have_questions'|trans }}</p>
 
             <a href="https://m.me/Informatics.ge" target="_blank">
-                <span>{{ 'დაგვიკავშირდით'|trans }}</span><img src="{{ asset('images/fbm.png') }}" alt="Messenger" width="40">
+                <span>{{ 'contact_us'|trans }}</span><img src="{{ asset('images/fbm.png') }}" alt="Messenger" width="40">
             </a>
 
             <!-- Your customer chat code -->
@@ -120,8 +120,8 @@
                  attribution=setup_tool
                  page_id="{{ getEnv('FB_PAGE_ID') }}"
                  theme_color="#db3631"
-                 logged_in_greeting="{{ 'მოგესალმებით! რით შეგვიძლია დაგეხმაროთ?'|trans }}"
-                 logged_out_greeting="{{ 'მოგესალმებით! რით შეგვიძლია დაგეხმაროთ?'|trans }}">
+                 logged_in_greeting="{{ 'messenger_hello_message'|trans }}"
+                 logged_out_greeting="{{ 'messenger_hello_message'|trans }}">
             </div>
         </div>
     </div>

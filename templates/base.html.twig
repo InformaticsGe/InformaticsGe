@@ -61,8 +61,8 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li class="{{ current_route == 'index' ? 'active' : ''}}"><a href="{{ url('index') }}">{{ 'მთავარი'|trans }}</a></li>
-                <li class="{{ current_route == 'about' ? 'active' : '' }}"><a href="{{ url('about') }}">{{ 'ჩვენ'|trans }}</a></li>
+                <li class="{{ current_route == 'index' ? 'active' : ''}}"><a href="{{ url('index') }}">{{ 'homepage'|trans }}</a></li>
+                <li class="{{ current_route == 'about' ? 'active' : '' }}"><a href="{{ url('about') }}">{{ 'we'|trans }}</a></li>
             </ul>
         </div>
     </div>
@@ -118,7 +118,7 @@
 <footer id="footer" class="footer">
     <div class="container text-center">
         <div class="partners">
-            <h2>{{ 'ჩვენი პარტნიორები'|trans }}</h2>
+            <h2>{{ 'our_partners'|trans }}</h2>
             <section class="partner-logos slider">
                 <div class="slide">
                     <a href="http://kings.ge" target="_blank">
@@ -168,17 +168,17 @@
         </ul>
 
         <div class="credits">
-            <p>©2018-{{ 'now'|date('Y') }} Informatics.ge. {{ 'ყველა უფლება დაცულია'|trans }}</p>
-            <p><b>{{ 'დრო სერვერზე'|trans }}: {{ 'now'|date("d.m.Y H:i:s") }}</b></p>
+            <p>©2018-{{ 'now'|date('Y') }} Informatics.ge. {{ 'all_rights_reserved'|trans }}</p>
+            <p><b>{{ 'server_time'|trans }}: {{ 'now'|date("d.m.Y H:i:s") }}</b></p>
         </div>
 
         <div class="links">
             <p>
-                <a href="{{ url('about') }}">{{ 'ჩვენ'|trans }}</a> |
-                <a href="#">{{ 'კონფიდენციალურობა'|trans }}</a> |
-                <a href="#">{{ 'წესდება'|trans }}</a>
+                <a href="{{ url('about') }}">{{ 'about_us'|trans }}</a> |
+                <a href="#">{{ 'confidentiality'|trans }}</a> |
+                <a href="#">{{ 'terms_and_conditions'|trans }}</a>
             </p>
-            <p><a href="https://old.informatics.ge">{{ 'საიტის ძველი ვერსია'|trans }}</a></p>
+            <p><a href="https://old.informatics.ge">{{ 'site_old_version'|trans }}</a></p>
             <p>
                 Create with <span style="color: red;">♥</span> By
                 <a href="http://www.abgeo.ga/" target="_blank">ABGEO</a>
