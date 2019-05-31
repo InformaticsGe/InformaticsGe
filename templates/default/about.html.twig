@@ -22,9 +22,15 @@
 
         <div class="col-sm-12 about">
             <div class="col-sm-12 text-center">
-                <p><b>Informatics.ge</b> - პროგრამირების შესწავლისა და სპორტული პროგრამირების ვებ-გვერდი.</p>
-                <p>ეს არის პლატფორმა, რომელიც დაეხმარება დამწყებ პროგრამისტებს მომავალი პროფესიის დაუფლებაში
-                    ხოლო გამოცდილებს - შესაძლებლობების გაუმჯობესებაში.</p>
+                {% if current_locale == 'ka' %}
+                    <p><b>Informatics.ge</b> - პროგრამირების შესწავლისა და სპორტული პროგრამირების ვებ-გვერდი.</p>
+                    <p>ეს არის პლატფორმა, რომელიც დაეხმარება დამწყებ პროგრამისტებს მომავალი პროფესიის დაუფლებაში
+                        ხოლო გამოცდილებს - შესაძლებლობების გაუმჯობესებაში.</p>
+                {% elseif current_locale == 'en' %}
+                    <p><b>Informatics.ge</b> - Website to learn programming and competitive programming.</p>
+                    <p>This is a platform, which will help beginner programmers to accuire future profession,
+                        and for improve skills of experienced ones And improve skills of experienced ones.</p>
+                {% endif %}
                 <br/>
                 <h3>{{ 'ჩვენი გუნდი'|trans }}</h3>
                 <br/>
@@ -40,11 +46,19 @@
                     </figure>
                 </div>
                 <div class="col-sm-8">
-                    <h3>
-                        ზაზა გამეზარდაშვილი
-                        <small>იდეის ავტორი</small>
-                    </h3>
-                    <p><b><i>საქართველოს ინფორმატიკის მოსწავლეთა ნაკრების თანალიდერი</i></b></p>
+                    {% if current_locale == 'ka' %}
+                        <h3>
+                            ზაზა გამეზარდაშვილი
+                            <small>იდეის ავტორი</small>
+                        </h3>
+                        <p><b><i>საქართველოს ინფორმატიკის მოსწავლეთა ნაკრების თანალიდერი</i></b></p>
+                    {% elseif current_locale == 'en' %}
+                        <h3>
+                            Zaza Gamezardashvili
+                            <small>Author of the idea</small>
+                        </h3>
+                        <p><b><i>Co-leader of the Georgian informatics team</i></b></p>
+                    {% endif %}
 
                     <ul class="social-network social-circle">
                         <li>
@@ -64,12 +78,20 @@
                     </figure>
                 </div>
                 <div class="col-sm-8">
-                    <h3>
-                        თემური თაკალანძე
-                        <small>ავტორი</small>
-                    </h3>
-                    <p><b><i>კავკასიის ტექნოლოგიების სკოლის (CST) სტუდენტი</i></b></p>
-                    <p>ამპარტავანი არ ვარ, მაგრამ ვვამაყობ ჩემი ამ ქმნილებით ))</p>
+                    {% if current_locale == 'ka' %}
+                        <h3>
+                            თემური თაკალანძე
+                            <small>ავტორი</small>
+                        </h3>
+                        <p><b><i>კავკასიის ტექნოლოგიების სკოლის (CST) სტუდენტი</i></b></p>
+                        <p>ამპარტავანი არ ვარ, მაგრამ ვვამაყობ ჩემი ამ ქმნილებით ))</p>
+                    {% elseif current_locale == 'en' %}
+                        <h3>
+                            Temuri Takalandze
+                            <small>Creator</small>
+                        </h3>
+                        <p><b><i>Student of the Caucasus School of Technology (CST)</i></b></p>
+                    {% endif %}
 
                     <ul class="social-network social-circle">
                         <li><a href="http://www.abgeo.ga/" target="_blank" class="icoWebsite" title="Website"><i
@@ -98,8 +120,8 @@
                  attribution=setup_tool
                  page_id="{{ getEnv('FB_PAGE_ID') }}"
                  theme_color="#db3631"
-                 logged_in_greeting="მოგესალმებით! რით შეგვიძლია დაგეხმაროთ?"
-                 logged_out_greeting="მოგესალმებით! რით შეგვიძლია დაგეხმაროთ?">
+                 logged_in_greeting="{{ 'მოგესალმებით! რით შეგვიძლია დაგეხმაროთ?'|trans }}"
+                 logged_out_greeting="{{ 'მოგესალმებით! რით შეგვიძლია დაგეხმაროთ?'|trans }}">
             </div>
         </div>
     </div>

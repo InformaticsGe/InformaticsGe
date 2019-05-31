@@ -73,6 +73,30 @@
 <section class="section-padding">
     <div class="container">
         <div class="row">
+            <!--Facebook SDK-->
+            <div id="fb-root"></div>
+            <script>
+                window.fbAsyncInit = function() {
+                    FB.init({
+                        appId      : '{{ getEnv('FB_APP_ID') }}',
+                        cookie     : true,
+                        xfbml      : true,
+                        version    : 'v3.2'
+                    });
+
+                    FB.AppEvents.logPageView();
+                };
+
+                (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "https://connect.facebook.net/ka_GE/sdk.js#xfbml=1&version=v3.2&appId={{ getEnv('FB_APP_ID') }}&autoLogAppEvents=1";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            </script>
+            <!--/ Facebook SDK-->
+
             <!--Content-->
             {% block body %}{% endblock %}
             <!--/ Content-->
@@ -150,7 +174,7 @@
 
         <div class="links">
             <p>
-                <a href="#">{{ 'ჩვენ'|trans }}</a> |
+                <a href="{{ url('about') }}">{{ 'ჩვენ'|trans }}</a> |
                 <a href="#">{{ 'კონფიდენციალურობა'|trans }}</a> |
                 <a href="#">{{ 'წესდება'|trans }}</a>
             </p>
