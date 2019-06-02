@@ -24,3 +24,5 @@ agree_with_terms: 'ვეთანხმები საიტის წეს�
 sign_in_txt: 'შესვლა'
 sign_in:
   remember_me: 'დამიმახსოვრე'
+my_profile: 'ჩემი პროფილი'
+logout: 'გამოსვლა'

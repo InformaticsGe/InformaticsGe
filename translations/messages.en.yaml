@@ -24,3 +24,6 @@ agree_with_terms: 'Agree with Website Terms'
 sign_in_txt: 'Sign in'
 sign_in:
   remember_me: 'Remember me'
+my_profile: 'My profile'
+logout: 'Logout'
+

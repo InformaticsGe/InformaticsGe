@@ -61,8 +61,26 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li class="{{ current_route == 'index' ? 'active' : ''}}"><a href="{{ url('index') }}">{{ 'homepage'|trans }}</a></li>
-                <li class="{{ current_route == 'about' ? 'active' : '' }}"><a href="{{ url('about') }}">{{ 'we'|trans }}</a></li>
+                <li class="{{ current_route == 'index' ? 'active' : '' }}"><a
+                            href="{{ url('index') }}">{{ 'homepage'|trans }}</a></li>
+                <li class="{{ current_route == 'about' ? 'active' : '' }}"><a
+                            href="{{ url('about') }}">{{ 'we'|trans }}</a></li>
+
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <li class="dropdown">
+                        <a class="dropdown-toggle link-trial" data-toggle="dropdown" href="#">
+                            {{ app.user.username }}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu navbar-nav">
+                            <li class=""><a href="#">{{ 'my_profile'|trans }}</a></li>
+
+                            <li><a href="{{ path('app_logout') }}" style="color: red;">{{ 'logout'|trans }}</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="btn-trial"><a href="{{ path('sign_in') }}">{{ 'sign_in_txt'|trans }}</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -76,21 +94,22 @@
             <!--Facebook SDK-->
             <div id="fb-root"></div>
             <script>
-                window.fbAsyncInit = function() {
+                window.fbAsyncInit = function () {
                     FB.init({
-                        appId      : '{{ getEnv('FB_APP_ID') }}',
-                        cookie     : true,
-                        xfbml      : true,
-                        version    : 'v3.2'
+                        appId: '{{ getEnv('FB_APP_ID') }}',
+                        cookie: true,
+                        xfbml: true,
+                        version: 'v3.2'
                     });
 
                     FB.AppEvents.logPageView();
                 };
 
-                (function(d, s, id) {
+                (function (d, s, id) {
                     var js, fjs = d.getElementsByTagName(s)[0];
                     if (d.getElementById(id)) return;
-                    js = d.createElement(s); js.id = id;
+                    js = d.createElement(s);
+                    js.id = id;
                     js.src = "https://connect.facebook.net/ka_GE/sdk.js#xfbml=1&version=v3.2&appId={{ getEnv('FB_APP_ID') }}&autoLogAppEvents=1";
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
