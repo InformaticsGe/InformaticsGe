@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'sign_in'|trans }}{% endblock %}
+{% block title %}{{ 'sign_in_txt'|trans }}{% endblock %}
 
 {% block body %}
     <div class="form-group col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
-        <h1 class="h3">{{ 'sign_in'|trans }}</h1>
+        <h1 class="h3">{{ 'sign_in_txt'|trans }}</h1>
 
         {{ form_start(loginForm) }}
 
@@ -39,14 +39,14 @@
 
         <div class="form-check">
             <label>
-                <input type="checkbox" name="_remember_me"> {{ 'remember_me'|trans }}
+                <input type="checkbox" name="_remember_me"> {{ 'sign_in.remember_me'|trans }}
             </label>
         </div>
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
         <div class="form-group">
-            <button class="btn btn-green btn-block btn-flat">{{ 'sign_in'|trans }}</button>
+            <button class="btn btn-green btn-block btn-flat">{{ 'sign_in_txt'|trans }}</button>
         </div>
 
         {{ form_end(loginForm) }}

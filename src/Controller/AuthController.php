@@ -13,6 +13,14 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AuthController extends AbstractController
 {
+    /**
+     * Users registration action.
+     *
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     *
+     * @return Response
+     */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
@@ -39,6 +47,13 @@ class AuthController extends AbstractController
         ]);
     }
 
+    /**
+     * Users login action.
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     *
+     * @return Response
+     */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();

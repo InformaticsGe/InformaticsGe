@@ -21,3 +21,6 @@ last_name: 'გვარი'
 password: 'პაროლი'
 repeat_password: 'გაიმეორეთ პაროლი'
 agree_with_terms: 'ვეთანხმები საიტის წესდებას'
+sign_in_txt: 'შესვლა'
+sign_in:
+  remember_me: 'დამიმახსოვრე'

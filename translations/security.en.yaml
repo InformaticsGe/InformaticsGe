@@ -1,0 +1,5 @@
+invalid_token: 'Invalid CSRF token'
+sign_in:
+  invalid_credentials: 'Invalid credentials'
+  user_not_verified: 'Your E-Mail not verified'
+  user_is_inactive: 'Your account is blocked'

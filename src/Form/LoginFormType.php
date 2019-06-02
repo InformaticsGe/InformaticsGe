@@ -27,7 +27,7 @@ class LoginFormType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'validation.enter_password',
+                        'message' => 'validation.is_blank',
                     ])
                 ]
             ]);;

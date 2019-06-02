@@ -21,3 +21,6 @@ last_name: 'Last name'
 password: 'Password'
 repeat_password: 'Repeat password'
 agree_with_terms: 'Agree with Website Terms'
+sign_in_txt: 'Sign in'
+sign_in:
+  remember_me: 'Remember me'

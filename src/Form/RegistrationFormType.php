@@ -73,12 +73,11 @@ class RegistrationFormType extends AbstractType
                 'second_options' => ['label' => 'repeat_password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'validation.enter_password',
+                        'message' => 'validation.is_blank',
                     ]),
                     new Length([
                         'min' => 6,
                         'minMessage' => 'validation.password_length',
-//                            'minMessage' => 'Your password should be at least {{ limit }} characters',
                         'max' => 4096,
                     ]),
                 ]
@@ -88,7 +87,9 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['class' => 'form-check-input'],
                 'label_attr' => ['class' => 'form-check-label'],
                 'mapped' => false,
-                'constraints' => new IsTrue(),
+                'constraints' => new IsTrue([
+                    'message' => 'validation.agree_with_terms'
+                ]),
             ]);;
     }
 

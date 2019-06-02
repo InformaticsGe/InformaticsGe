@@ -1,0 +1,5 @@
+invalid_token: 'არასწორი CSRF ტოკენი'
+sign_in:
+  invalid_credentials: 'არასწორი მონაცემები'
+  user_not_verified: 'თქვენი ელ.ფოსტა არ არის ვერიფიცირებული'
+  user_is_inactive: 'თქვენი პროფილი დაბლოკილია'
