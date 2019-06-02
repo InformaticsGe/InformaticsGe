@@ -5,10 +5,13 @@ namespace App\Entity;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"username"}, message="validation.user_already_exists")
+ * @UniqueEntity(fields={"email"}, message="validation.email_taken")
  */
 class User implements UserInterface
 {
@@ -79,6 +82,16 @@ class User implements UserInterface
      * @ORM\Column(type="datetime")
      */
     private $registrationDate;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $verified;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active;
 
     public function getId(): ?int
     {
@@ -263,6 +276,30 @@ class User implements UserInterface
     public function setRegistrationDate(DateTimeInterface $registrationDate): self
     {
         $this->registrationDate = $registrationDate;
+
+        return $this;
+    }
+
+    public function isVerified(): ?bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): self
+    {
+        $this->verified = $verified;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

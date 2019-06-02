@@ -13,3 +13,23 @@ about:
         _locale: ka
     requirements:
         _locale:  ka|en
+
+sign_up:
+    path: /{_locale}/register
+    controller: App\Controller\AuthController::register
+    defaults:
+        _locale: ka
+    requirements:
+        _locale:  ka|en
+
+sign_in:
+    path: /{_locale}/login
+    controller: App\Controller\AuthController::login
+    defaults:
+        _locale: ka
+    requirements:
+        _locale:  ka|en
+
+app_logout:
+    path: /logout
+    methods: GET

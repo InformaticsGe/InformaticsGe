@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'register'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="form-group col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
+        <h1 class="h3">{{ 'create_new_account'|trans }}</h1>
+        {{ form_start(registrationForm) }}
+
+        <div class="form-group has-feedback {{ form_errors(registrationForm.username) ? 'has-error' : '' }}">
+            {{ form_label(registrationForm.username) }}
+            {{ form_widget(registrationForm.username) }}
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+
+            {% if form_errors(registrationForm.username) %}
+                <div class="invalid-feedback">
+                    {{ form_errors(registrationForm.username) }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group has-feedback {{ form_errors(registrationForm.email) ? 'has-error' : '' }}">
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email) }}
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+
+            {% if form_errors(registrationForm.email) %}
+                <div class="invalid-feedback">
+                    {{ form_errors(registrationForm.email) }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group {{ form_errors(registrationForm.firstName) ? 'has-error' : '' }}">
+            {{ form_label(registrationForm.firstName) }}
+            {{ form_widget(registrationForm.firstName) }}
+
+            {% if form_errors(registrationForm.firstName) %}
+                <div class="invalid-feedback">
+                    {{ form_errors(registrationForm.firstName) }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group {{ form_errors(registrationForm.lastName) ? 'has-error' : '' }}">
+            {{ form_label(registrationForm.lastName) }}
+            {{ form_widget(registrationForm.lastName) }}
+
+            {% if form_errors(registrationForm.lastName) %}
+                <div class="invalid-feedback">
+                    {{ form_errors(registrationForm.lastName) }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group has-feedback {{ form_errors(registrationForm.password.first) ? 'has-error' : '' }}">
+            {{ form_label(registrationForm.password.first) }}
+            {{ form_widget(registrationForm.password.first) }}
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+            {% if form_errors(registrationForm.password.first) %}
+                <div class="invalid-feedback">
+                    {{ form_errors(registrationForm.password.first) }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group has-feedback {{ form_errors(registrationForm.password.second) ? 'has-error' : '' }}">
+            {{ form_label(registrationForm.password.second) }}
+            {{ form_widget(registrationForm.password.second) }}
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+            {% if form_errors(registrationForm.password.second) %}
+                <div class="invalid-feedback">
+                    {{ form_errors(registrationForm.password.second) }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-check">
+            {{ form_widget(registrationForm.terms) }}
+            {{ form_label(registrationForm.terms) }}
+
+            {% if form_errors(registrationForm.terms) %}
+                <div class="invalid-feedback">
+                    {{ form_errors(registrationForm.terms) }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-green btn-block btn-flat">{{ 'register'|trans }}</button>
+        </div>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}
