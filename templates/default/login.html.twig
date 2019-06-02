@@ -1,10 +1,25 @@
+{#
+/**
+  * @file
+  * Template for login page.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_locale: Current language code.
+  * - loginForm: FormBuilder instace for login form.
+  */
+#}
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ 'sign_in_txt'|trans }}{% endblock %}
 
 {% block body %}
     <div class="form-group col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
-        <h1 class="h3">{{ 'sign_in_txt'|trans }}</h1>
+        <h1 class="h3 login-box-msg">{{ 'sign_in_txt'|trans }}</h1>
+        <p class="login-box-msg">
+            {{ 'sign_in_or_sign_up.0'|trans }}
+            <a href="{{ path('sign_up') }}">{{ 'sign_in_or_sign_up.1'|trans }}</a>.
+        </p>
 
         {{ form_start(loginForm) }}
 
@@ -50,5 +65,9 @@
         </div>
 
         {{ form_end(loginForm) }}
+
+        <p class="login-box-msg">
+            <a href="#">{{ 'forgot_password'|trans }}</a>
+        </p>
     </div>
 {% endblock %}

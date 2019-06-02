@@ -26,4 +26,11 @@ sign_in:
   remember_me: 'Remember me'
 my_profile: 'My profile'
 logout: 'Logout'
+sign_in_or_sign_up:
+  - 'Log in to your account or'
+  - 'create new'
+sign_up_or_sign_in:
+  - 'Create new account or'
+  - 'Log in'
+forgot_password: 'Forgot password?'
 
