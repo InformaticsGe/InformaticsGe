@@ -114,9 +114,42 @@ class AuthController extends AbstractController
 
     }
 
+    /**
+     * Verify user email.
+     *
+     * @param string $_locale
+     * @param $token
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
+     */
     public function verify(string $_locale, $token)
     {
-        dump($token);
-        die;
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $tokenRepo = $doctrine->getRepository(Token::class);
+        $tokenObj = $tokenRepo->findOneBy(['token' => $token]);
+
+        $redirectOptions = [];
+        if ($tokenObj && (new \DateTime()) <= $tokenObj->getExpiration()) {
+            $userRepo = $doctrine->getRepository(User::class);
+            $user = $userRepo->find($tokenObj->getUser());
+
+            // Verify user.
+            $user->setVerified(true);
+            $em->persist($user);
+            $em->flush();
+
+            // Remove token from db.
+            $em->remove($tokenObj);
+            $em->flush();
+
+            $redirectOptions = [
+                'status_code' => 'success_verification'
+            ];
+        }
+
+        $redirection = $this->redirectToRoute('index', $redirectOptions);
+
+        return $redirection;
     }
 }

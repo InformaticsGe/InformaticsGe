@@ -98,7 +98,7 @@ class User implements UserInterface
         $this->avatar = 'avatar1.png';
         $this->registrationDate = new DateTime();
         $this->verified = false;
-        $this->active = false;
+        $this->active = true;
     }
 
     public function getId(): ?int
