@@ -33,3 +33,11 @@ sign_in:
 app_logout:
     path: /logout
     methods: GET
+
+verify_account:
+    path: /{_locale}/verify/{token}
+    controller: App\Controller\AuthController::verify
+    defaults:
+        _locale: ka
+    requirements:
+        _locale:  ka|en

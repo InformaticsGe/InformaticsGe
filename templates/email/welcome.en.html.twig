@@ -1,0 +1,7 @@
+<p>Welcome <b>{{ name }} {{ surname }}</b>,</p>
+
+<p>Thank you for registration on <b>Informatics.Ge</b>!</p>
+
+<p>Please visit <a href="{{ absolute_url(path('verify_account', {'token': token})) }}">this link</a> to complete the registration.</p>
+
+<p>Please note, that the link is active for <b>{{expiration}}</b>.</p>

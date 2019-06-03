@@ -93,15 +93,17 @@ class User implements UserInterface
      */
     private $active;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function __construct()
     {
         $this->avatar = 'avatar1.png';
         $this->registrationDate = new DateTime();
+        $this->verified = false;
+        $this->active = false;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     /**
