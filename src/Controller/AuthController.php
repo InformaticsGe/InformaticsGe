@@ -133,7 +133,10 @@ class AuthController extends AbstractController
         $tokenObj = $tokenRepo->findOneBy(['token' => $token]);
 
         $redirectOptions = [];
-        if ($tokenObj && (new \DateTime()) <= $tokenObj->getExpiration()) {
+        if ('verify' === substr($token, 0, 6)
+            && $tokenObj
+            && (new \DateTime()) <= $tokenObj->getExpiration()
+        ) {
             $userRepo = $doctrine->getRepository(User::class);
             $user = $userRepo->find($tokenObj->getUser());
 
@@ -190,7 +193,9 @@ class AuthController extends AbstractController
 
             if ($user) {
                 // Remove old token.
-                if ($oldToken = $tokenRepo->findOneBy(['user' => $user->getId()])) {
+                $oldToken = $tokenRepo->findOneBy(['user' => $user->getId()]);
+                if ($oldToken && 'reset' === substr($oldToken->getToken(), 0, 5)
+                ) {
                     $em->remove($oldToken);
                     $em->flush();
                 }
@@ -260,7 +265,9 @@ class AuthController extends AbstractController
 
         $tokenObj = $tokenRepo->findOneBy(['token' => $token]);
 
-        if (!$tokenObj || (new \DateTime()) > $tokenObj->getExpiration()) {
+        if ('reset' !== substr($token, 0, 5)
+            || !$tokenObj || (new \DateTime()) > $tokenObj->getExpiration()
+        ) {
             $redirection = $this->redirectToRoute('index');
 
             return $redirection;
@@ -288,7 +295,6 @@ class AuthController extends AbstractController
             // Remove token form db.
             $em->remove($tokenObj);
             $em->flush();
-
 
             // Redirect to homepage.
 
