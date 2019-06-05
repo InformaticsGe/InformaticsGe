@@ -33,4 +33,8 @@ sign_up_or_sign_in:
   - 'Create new account or'
   - 'Log in'
 forgot_password: 'Forgot password?'
-
+reset:
+  reset_password: 'Reset password'
+  username_or_email: 'Username or E-Mail'
+  success_reset: 'პაროლის აღდგენის ინსტრუქცია წარმატებით გაიგზავნა თქვენს ელ.ფოსტაზე.'
+  user_not_found: 'მომხმარებელი ამ მომხმარებლის სახელით ან ელ.ფოსტის მისამართით ვერ მოიძებნა!'

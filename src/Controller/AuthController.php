@@ -6,6 +6,7 @@ use App\Entity\Token;
 use App\Entity\User;
 use App\Form\LoginFormType;
 use App\Form\RegistrationFormType;
+use App\Form\ResetPasswordFormType;
 use App\Service\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -96,7 +97,7 @@ class AuthController extends AbstractController
      *
      * @return Response
      */
-    public function login(string $_locale,AuthenticationUtils $authenticationUtils): Response
+    public function login(string $_locale, AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
@@ -119,6 +120,7 @@ class AuthController extends AbstractController
      *
      * @param string $_locale
      * @param $token
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Exception
      */
@@ -151,5 +153,100 @@ class AuthController extends AbstractController
         $redirection = $this->redirectToRoute('index', $redirectOptions);
 
         return $redirection;
+    }
+
+    /**
+     * Reset user password.
+     *
+     * @param string $_locale
+     * @param Request $request
+     *
+     * @param Mailer $mailer
+     * @return Response
+     *
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function resetPassword(string $_locale, Request $request, Mailer $mailer)
+    {
+        $form = $this->createForm(ResetPasswordFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Get username from form.
+            $username = $form->get('username_or_email')->getData();
+
+            $doctrine = $this->getDoctrine();
+            $em = $doctrine->getManager();
+
+            $userRepo = $doctrine->getRepository(User::class);
+            $tokenRepo = $doctrine->getRepository(Token::class);
+
+            // Get user.
+            $user = $userRepo->findOneBy(['username' => $username]) ?:
+                $userRepo->findOneBy(['email' => $username]);
+
+            if ($user) {
+                // Remove old token.
+                if ($oldToken = $tokenRepo->findOneBy(['user' => $user->getId()])) {
+                    $em->remove($oldToken);
+                    $em->flush();
+                }
+
+                // Generate new token.
+
+                $uniqToken = uniqid('reset', true);
+
+                $token = new Token();
+                $token->setUser($user)->setToken($uniqToken);
+
+                // Save token in db.
+                $em->persist($token);
+                $em->flush();
+
+                // Sand reset email.
+                $sendStatus = $mailer->sendMessage(
+                    [$user->getEmail() => $user->getFirstName() . ' ' . $user->getLastName()],
+                    'Informatics.Ge Password reset',
+                    'email/reset-password.' . $_locale . '.html.twig',
+                    [
+                        'name' => $user->getFirstName(),
+                        'surname' => $user->getLastName(),
+                        'token' => $token->getToken(),
+                        'expiration' => $token->getExpiration()->format('d.m.Y H:i:s')
+                    ]
+                );
+
+                // Add flush message
+                if ($sendStatus) {
+                    $this->addFlash(
+                        'password-reset-success',
+                        'reset.success_reset'
+                    );
+                }
+            } else {
+                $this->addFlash(
+                    'password-reset-error',
+                    'reset.user_not_found'
+                );
+            }
+        }
+
+        return $this->render('default/reset-password.html.twig', [
+            'resetForm' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Reset user password.
+     *
+     * @param string $_locale
+     * @param $token
+     */
+    public function reset(string $_locale, $token)
+    {
+        dump($token);
+        die;
     }
 }

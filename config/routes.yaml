@@ -1,43 +1,59 @@
 index:
-    path: /{_locale}
-    controller: App\Controller\DefaultController::index
-    defaults:
-        _locale: ka
-    requirements:
-        _locale:  ka|en
+  path: /{_locale}
+  controller: App\Controller\DefaultController::index
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
 
 about:
-    path: /{_locale}/about
-    controller: App\Controller\DefaultController::about
-    defaults:
-        _locale: ka
-    requirements:
-        _locale:  ka|en
+  path: /{_locale}/about
+  controller: App\Controller\DefaultController::about
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
 
 sign_up:
-    path: /{_locale}/register
-    controller: App\Controller\AuthController::register
-    defaults:
-        _locale: ka
-    requirements:
-        _locale:  ka|en
+  path: /{_locale}/register
+  controller: App\Controller\AuthController::register
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
 
 sign_in:
-    path: /{_locale}/login
-    controller: App\Controller\AuthController::login
-    defaults:
-        _locale: ka
-    requirements:
-        _locale:  ka|en
+  path: /{_locale}/login
+  controller: App\Controller\AuthController::login
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
 
 app_logout:
-    path: /logout
-    methods: GET
+  path: /logout
+  methods: GET
 
 verify_account:
-    path: /{_locale}/verify/{token}
-    controller: App\Controller\AuthController::verify
-    defaults:
-        _locale: ka
-    requirements:
-        _locale:  ka|en
+  path: /{_locale}/verify/{token}
+  controller: App\Controller\AuthController::verify
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
+
+reset_password:
+  path: /{_locale}/reset-password
+  controller: App\Controller\AuthController::resetPassword
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
+
+password_reset:
+  path: /{_locale}/reset-password/{token}
+  controller: App\Controller\AuthController::reset
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en

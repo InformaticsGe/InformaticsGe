@@ -33,3 +33,8 @@ sign_up_or_sign_in:
   - 'შექმენით ანგარიში ან გაიარეთ'
   - 'ავტორიზაცია'
 forgot_password: 'დაგავიწყდათ პაროლი?'
+reset:
+  reset_password: 'პაროლის აღდგენა'
+  username_or_email: 'მომხმარებლის სახელი ან ელ.ფოსტა'
+  success_reset: 'Password reset instructions has been sent to your E-Mail address.'
+  user_not_found: 'User with this Username or E-Mail address not found!'
