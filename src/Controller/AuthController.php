@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Token;
 use App\Entity\User;
 use App\Form\LoginFormType;
+use App\Form\PasswordResetFormType;
 use App\Form\RegistrationFormType;
 use App\Form\ResetPasswordFormType;
 use App\Service\Mailer;
@@ -239,14 +240,65 @@ class AuthController extends AbstractController
     }
 
     /**
-     * Reset user password.
+     * Reset user password and save in database.
      *
      * @param string $_locale
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
      * @param $token
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @throws \Exception
      */
-    public function reset(string $_locale, $token)
+    public function reset(string $_locale, Request $request, UserPasswordEncoderInterface $passwordEncoder, $token)
     {
-        dump($token);
-        die;
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+
+        $userRepo = $doctrine->getRepository(User::class);
+        $tokenRepo = $doctrine->getRepository(Token::class);
+
+        $tokenObj = $tokenRepo->findOneBy(['token' => $token]);
+
+        if (!$tokenObj || (new \DateTime()) > $tokenObj->getExpiration()) {
+            $redirection = $this->redirectToRoute('index');
+
+            return $redirection;
+        }
+
+        $form = $this->createForm(PasswordResetFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Get user.
+            $user = $userRepo->findOneBy(['id' => $tokenObj->getUser()]);
+
+            // Update user password.
+
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
+
+            $em->persist($user);
+            $em->flush();
+
+            // Remove token form db.
+            $em->remove($tokenObj);
+            $em->flush();
+
+
+            // Redirect to homepage.
+
+            $redirection = $this->redirectToRoute('index', ['status_code' => 'success_reset']);
+
+            return $redirection;
+        }
+
+        return $this->render('default/password-reset.html.twig', [
+            'resetForm' => $form->createView(),
+        ]);
     }
 }
