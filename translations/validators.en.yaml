@@ -1,0 +1,11 @@
+validation:
+  is_blank: 'This field should be filled'
+  username_invalid_chars: 'The user name is allowed only letters, numbers and "." "_" Symbols'
+  invalid_email: 'Invalid E-Mail address'
+  passwords_not_match: "Passwords don't match"
+  password_length: 'Password must contain at least %count% characters'
+  agree_with_terms: 'You must agree with the Website Terms'
+  user_already_exists: 'This user already exists'
+  email_taken: 'E-Mail is busy'
+  empty_recaptcha: 'Check that you are not a robot'
+  invalid_recaptcha: 'Invalid Recaptcha'

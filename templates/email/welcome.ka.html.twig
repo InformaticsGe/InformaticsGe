@@ -1,0 +1,19 @@
+{#
+/**
+  * @file
+  * Welcome email template in KA.
+  *
+  * Available variables:
+  * - name: Recipient name.
+  * - surname: Recipient surname.
+  * - token: Verification token.
+  * - expiration: Verification token expiration date and time.
+  */
+#}
+<p>მოგესალმებით <b>{{ name }} {{ surname }}</b>,</p>
+
+<p>მადლობას გიხდით <b>Informatics.Ge</b>-ზე რეგისტრაციისთვის!</p>
+
+<p>რეგისტრაციის დასრულებისთვის გთხოვთ, ესტუმრეთ <a href="{{ absolute_url(path('verify_account', {'token': token})) }}">ამ ბმულს</a>.</p>
+
+<p>გთხოვთ გაითვალისწინოთ, რომ ბმული აქტიურია <b>{{ expiration }}</b>-მდე.</p>

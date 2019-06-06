@@ -12,3 +12,28 @@ if_you_have_questions: 'კითხვების არსებობის 
 contact_us: 'დაგვიკავშირდით'
 our_teaam: 'ჩვენი გუნდი'
 messenger_hello_message: 'მოგესალმებით! რით შეგვიძლია დაგეხმაროთ?'
+register: 'რეგისტრაცია'
+create_new_account: 'ახალი ანგარიშის შექმნა'
+username: 'მომხმარებლის სახელი'
+email: 'ელ.ფოსტა'
+first_name: 'სახელი'
+last_name: 'გვარი'
+password: 'პაროლი'
+new_password: 'ახალი პაროლი'
+repeat_password: 'გაიმეორეთ პაროლი'
+agree_with_terms: 'ვეთანხმები საიტის წესდებას'
+sign_in_txt: 'შესვლა'
+sign_in:
+  remember_me: 'დამიმახსოვრე'
+my_profile: 'ჩემი პროფილი'
+logout: 'გამოსვლა'
+sign_in_or_sign_up:
+  - 'შედით თქვენს ანგარიშში ან'
+  - 'შექმენით ახალი'
+sign_up_or_sign_in:
+  - 'შექმენით ანგარიში ან გაიარეთ'
+  - 'ავტორიზაცია'
+forgot_password: 'დაგავიწყდათ პაროლი?'
+reset:
+  reset_password: 'პაროლის აღდგენა'
+  username_or_email: 'მომხმარებლის სახელი ან ელ.ფოსტა'

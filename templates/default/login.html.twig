@@ -1,0 +1,74 @@
+{#
+/**
+  * @file
+  * Template for login page.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_locale: Current language code.
+  * - loginForm: FormBuilder instace for login form.
+  * - error: Error exception.
+  */
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'sign_in_txt'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="form-group col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
+        <h1 class="h3 login-box-msg">{{ 'sign_in_txt'|trans }}</h1>
+        <p class="login-box-msg">
+            {{ 'sign_in_or_sign_up.0'|trans }}
+            <a href="{{ path('sign_up') }}">{{ 'sign_in_or_sign_up.1'|trans }}</a>.
+        </p>
+
+        {{ form_start(loginForm) }}
+
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <div class="form-group has-feedback {{ form_errors(loginForm.username) ? 'has-error' : '' }}">
+            {{ form_label(loginForm.username) }}
+            {{ form_widget(loginForm.username, {'value': lastUsername}) }}
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+
+            {% if form_errors(loginForm.username) %}
+                <div class="invalid-feedback">
+                    {{ form_errors(loginForm.username) }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group has-feedback {{ form_errors(loginForm.password) ? 'has-error' : '' }}">
+            {{ form_label(loginForm.password) }}
+            {{ form_widget(loginForm.password) }}
+
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+            {% if form_errors(loginForm.password) %}
+                <div class="invalid-feedback">
+                    {{ form_errors(loginForm.password) }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-check">
+            <label>
+                <input type="checkbox" name="_remember_me"> {{ 'sign_in.remember_me'|trans }}
+            </label>
+        </div>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <div class="form-group">
+            <button class="btn btn-green btn-block btn-flat">{{ 'sign_in_txt'|trans }}</button>
+        </div>
+
+        {{ form_end(loginForm) }}
+
+        <p class="login-box-msg">
+            <a href="{{ path('reset_password') }}">{{ 'forgot_password'|trans }}</a>
+        </p>
+    </div>
+{% endblock %}
