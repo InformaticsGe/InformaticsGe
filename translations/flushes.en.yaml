@@ -1,0 +1,6 @@
+flush:
+  success_registration: 'You have successfully registered. Please check your email for profile verification.'
+  success_verification: 'Your profile has been successfully verified.'
+  success_reset: 'Your password has been successfully updated.'
+  reset_email_sent: 'Password reset instructions has been sent to your E-Mail address.'
+  reset_user_not_found: 'User with this Username or E-Mail address not found!'

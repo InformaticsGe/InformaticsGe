@@ -37,5 +37,3 @@ forgot_password: 'Forgot password?'
 reset:
   reset_password: 'Reset password'
   username_or_email: 'Username or E-Mail'
-  success_reset: 'Password reset instructions has been sent to your E-Mail address.'
-  user_not_found: 'User with this Username or E-Mail address not found!'

@@ -101,7 +101,10 @@ class AuthController extends AbstractController
                     ]
                 );
 
-                $redirection = $this->redirectToRoute('index', ['status_code' => 'success_registration']);
+                // Add flush message.
+                $this->addFlash( 'success', 'flush.success_registration');
+
+                $redirection = $this->redirectToRoute('index');
 
                 return $redirection;
             }
@@ -158,7 +161,6 @@ class AuthController extends AbstractController
         $tokenRepo = $doctrine->getRepository(Token::class);
         $tokenObj = $tokenRepo->findOneBy(['token' => $token]);
 
-        $redirectOptions = [];
         if ('verify' === substr($token, 0, 6)
             && $tokenObj
             && (new \DateTime()) <= $tokenObj->getExpiration()
@@ -174,13 +176,12 @@ class AuthController extends AbstractController
             // Remove token from db.
             $em->remove($tokenObj);
             $em->flush();
-
-            $redirectOptions = [
-                'status_code' => 'success_verification'
-            ];
         }
 
-        $redirection = $this->redirectToRoute('index', $redirectOptions);
+        // Add flush message.
+        $this->addFlash( 'success', 'flush.success_verification');
+
+        $redirection = $this->redirectToRoute('index');
 
         return $redirection;
     }
@@ -252,16 +253,10 @@ class AuthController extends AbstractController
 
                 // Add flush message
                 if ($sendStatus) {
-                    $this->addFlash(
-                        'password-reset-success',
-                        'reset.success_reset'
-                    );
+                    $this->addFlash('success', 'flush.reset_email_sent');
                 }
             } else {
-                $this->addFlash(
-                    'password-reset-error',
-                    'reset.user_not_found'
-                );
+                $this->addFlash('danger', 'flush.reset_user_not_found');
             }
         }
 
@@ -322,9 +317,12 @@ class AuthController extends AbstractController
             $em->remove($tokenObj);
             $em->flush();
 
+            // Add flush message.
+            $this->addFlash( 'success', 'flush.success_reset');
+
             // Redirect to homepage.
 
-            $redirection = $this->redirectToRoute('index', ['status_code' => 'success_reset']);
+            $redirection = $this->redirectToRoute('index');
 
             return $redirection;
         }

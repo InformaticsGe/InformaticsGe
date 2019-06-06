@@ -116,6 +116,19 @@
             </script>
             <!--/ Facebook SDK-->
 
+            <!--Flush Messages-->
+            <div class="col-md-12 text-center">
+                {% for type, messages in app.flashes() %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ type }}">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ message|trans([], 'flushes') }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            <!--/ Flush Messages-->
+
             <!--Content-->
             {% block body %}{% endblock %}
             <!--/ Content-->
