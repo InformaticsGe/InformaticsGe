@@ -8,12 +8,15 @@ use App\Form\LoginFormType;
 use App\Form\PasswordResetFormType;
 use App\Form\RegistrationFormType;
 use App\Form\ResetPasswordFormType;
-use App\Service\Mailer;
+use App\Service\MailerService;
+use App\Service\RecaptchaService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -26,60 +29,83 @@ class AuthController extends AbstractController
      * @param string $_locale
      * @param Request $request Current request.
      * @param UserPasswordEncoderInterface $passwordEncoder Password encoder.
-     * @param Mailer $mailer
+     * @param MailerService $mailer
+     * @param RecaptchaService $recaptcha
+     * @param TranslatorInterface $translator
      *
      * @return Response
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function register(string $_locale, Request $request, UserPasswordEncoderInterface $passwordEncoder, Mailer $mailer): Response
+    public function register(
+        string $_locale,
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        MailerService $mailer,
+        RecaptchaService $recaptcha,
+        TranslatorInterface $translator): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
+            $recaptchaResponse = $recaptcha->checkRecaptcha($request);
 
-            $entityManager = $this->getDoctrine()->getManager();
+            // Check recaptcha.
+            if (!$recaptchaResponse['success']) {
+                if (in_array('missing-input-response', $recaptchaResponse['errors'])) {
+                    $recaptchaValidation = 'validation.empty_recaptcha';
+                } else {
+                    $recaptchaValidation = 'validation.invalid_recaptcha';
+                }
 
-            // Save user in database.
-            $entityManager->persist($user);
-            $entityManager->flush();
+                // Add recaptcha error.
+                $form->get('recaptcha')->addError(new FormError($translator->trans($recaptchaValidation, [], 'validators')));
+            } else {
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
 
-            // Generate user verification token.
-            $uniqToken = uniqid('verify', true);
+                $entityManager = $this->getDoctrine()->getManager();
 
-            // Create new Token object.
-            $token = new Token();
-            $token->setUser($user)->setToken($uniqToken);
+                // Save user in database.
+                $entityManager->persist($user);
+                $entityManager->flush();
 
-            // Save token in db.
-            $entityManager->persist($token);
-            $entityManager->flush();
+                // Generate user verification token.
+                $uniqToken = uniqid('verify', true);
 
-            // Send welcome message.
-            $mailer->sendMessage(
-                [$user->getEmail() => $user->getFirstName() . ' ' . $user->getLastName()],
-                'Welcome to Informatics.Ge',
-                'email/welcome.' . $_locale . '.html.twig',
-                [
-                    'name' => $user->getFirstName(),
-                    'surname' => $user->getLastName(),
-                    'token' => $token->getToken(),
-                    'expiration' => $token->getExpiration()->format('d.m.Y H:i:s')
-                ]
-            );
+                // Create new Token object.
+                $token = new Token();
+                $token->setUser($user)->setToken($uniqToken);
 
-            $redirection = $this->redirectToRoute('index', ['status_code' => 'success_registration']);
+                // Save token in db.
+                $entityManager->persist($token);
+                $entityManager->flush();
 
-            return $redirection;
+                // Send welcome message.
+                $mailer->sendMessage(
+                    [$user->getEmail() => $user->getFirstName() . ' ' . $user->getLastName()],
+                    'Welcome to Informatics.Ge',
+                    'email/welcome.' . $_locale . '.html.twig',
+                    [
+                        'name' => $user->getFirstName(),
+                        'surname' => $user->getLastName(),
+                        'token' => $token->getToken(),
+                        'expiration' => $token->getExpiration()->format('d.m.Y H:i:s')
+                    ]
+                );
+
+                $redirection = $this->redirectToRoute('index', ['status_code' => 'success_registration']);
+
+                return $redirection;
+            }
+
         }
 
         return $this->render(
@@ -165,14 +191,14 @@ class AuthController extends AbstractController
      * @param string $_locale
      * @param Request $request
      *
-     * @param Mailer $mailer
+     * @param MailerService $mailer
      * @return Response
      *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function resetPassword(string $_locale, Request $request, Mailer $mailer)
+    public function resetPassword(string $_locale, Request $request, MailerService $mailer)
     {
         $form = $this->createForm(ResetPasswordFormType::class);
         $form->handleRequest($request);

@@ -7,3 +7,5 @@ validation:
   agree_with_terms: 'უნდა დაეთანხმოთ საიტის წესდებას'
   user_already_exists: 'ეს მომხმარებელი უკვე არსებობს'
   email_taken: 'ელ.ფოსტა დაკავებულია'
+  empty_recaptcha: 'მონიშნეთ, რომ არ ხართ რობოტი'
+  invalid_recaptcha: 'Invalid Recaptcha'

@@ -22,7 +22,7 @@ use Twig\Error\SyntaxError;
 /**
  * Class Mailer.
  */
-class Mailer
+class MailerService
 {
 
     /**

@@ -90,6 +90,11 @@ class RegistrationFormType extends AbstractType
                 'constraints' => new IsTrue([
                     'message' => 'validation.agree_with_terms'
                 ]),
+            ])
+            ->add('recaptcha', TextType::class, [
+                'mapped' => false,
+                'required' => false,
+                'attr' => ['hidden' => 'hidden'],
             ]);;
     }
 

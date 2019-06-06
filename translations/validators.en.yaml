@@ -7,3 +7,5 @@ validation:
   agree_with_terms: 'You must agree with the Website Terms'
   user_already_exists: 'This user already exists'
   email_taken: 'E-Mail is busy'
+  empty_recaptcha: 'Check that you are not a robot'
+  invalid_recaptcha: 'Invalid Recaptcha'
