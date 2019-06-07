@@ -41,6 +41,7 @@ yes: 'Yes'
 no: 'No'
 
 # Admin panel
+admin_panel: 'Admin panel'
 admin:
   label:
     users: 'Users'

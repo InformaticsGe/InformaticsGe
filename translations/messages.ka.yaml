@@ -41,6 +41,7 @@ yes: 'კი'
 no: 'არა'
 
 # Admin panel
+admin_panel: 'ადმინ პანელი'
 admin:
   label:
     users: 'მომხმარებელები'

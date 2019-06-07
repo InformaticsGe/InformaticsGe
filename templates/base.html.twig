@@ -73,8 +73,10 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu navbar-nav">
+                            {% if is_granted(['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']) %}
+                                <li><a href="{{ path('sonata_admin_dashboard') }}">{{ 'admin_panel'|trans }}</a></li>
+                            {% endif %}
                             <li class=""><a href="#">{{ 'my_profile'|trans }}</a></li>
-
                             <li><a href="{{ path('app_logout') }}" style="color: red;">{{ 'logout'|trans }}</a></li>
                         </ul>
                     </li>
