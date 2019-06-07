@@ -37,3 +37,37 @@ forgot_password: 'Forgot password?'
 reset:
   reset_password: 'Reset password'
   username_or_email: 'Username or E-Mail'
+yes: 'Yes'
+no: 'No'
+
+# Admin panel
+admin_panel: 'Admin panel'
+admin:
+  label:
+    users: 'Users'
+    roles: 'Roles'
+    id: 'ID'
+    username: 'Username'
+    active: 'Is Active'
+    verified: 'Is Verified'
+    email: 'E-Mail'
+    first_name: 'First name'
+    last_name: 'Last name'
+    registration_date : 'Registration date'
+
+    password: 'Password'
+    repeat_password: 'Repeat password'
+    university: 'University'
+    favorite_language: 'Favorite language'
+    intereset: 'Interests'
+    about: 'About'
+    machine_name: 'Machine name'
+    title_ka: 'Title in Georgian'
+    title_en: 'Title in English'
+  group:
+    account: 'Account information'
+    personal: 'Personal information'
+User List: 'User List'
+Role List: 'Role List'
+User Create: 'User Create'
+Role Create: 'Role Create'
