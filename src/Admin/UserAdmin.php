@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -45,9 +46,12 @@ final class UserAdmin extends AbstractAdmin
         }
 
         $formMapper
-            ->with('Account', ['class' => 'col-md-6'])
+            ->with('admin.group.account', [
+                'class' => 'col-md-6',
+                'box_class'   => 'box box-danger',
+            ])
             ->add('username', TextType::class, [
-                'label' => 'username',
+                'label' => 'admin.label.username',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'validation.is_blank'
@@ -59,7 +63,7 @@ final class UserAdmin extends AbstractAdmin
                 ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'email',
+                'label' => 'admin.label.email',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'validation.is_blank'
@@ -72,8 +76,8 @@ final class UserAdmin extends AbstractAdmin
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'validation.passwords_not_match',
-                'first_options' => ['label' => 'password'],
-                'second_options' => ['label' => 'repeat_password'],
+                'first_options' => ['label' => 'admin.label.password'],
+                'second_options' => ['label' => 'admin.label.repeat_password'],
                 'constraints' => [
                     new Length([
                         'min' => 6,
@@ -84,27 +88,30 @@ final class UserAdmin extends AbstractAdmin
                 'required' => false
             ])
             ->add('roles', ChoiceType::class, [
+                'label' => 'admin.label.roles',
                 'choices' => $roleChoices,
                 'expanded' => false,
                 'multiple' => true,
                 'required' => false,
             ])
             ->add('active', ChoiceType::class, [
+                'label' => 'admin.label.active',
                 'choices' => [
                     'yes' => true,
                     'no' => false
                 ],
             ])
             ->add('verified', ChoiceType::class, [
+                'label' => 'admin.label.verified',
                 'choices' => [
                     'yes' => true,
                     'no' => false
                 ],
             ])
             ->end()
-            ->with('Personal', ['class' => 'col-md-6'])
+            ->with('admin.group.personal', ['class' => 'col-md-6'])
             ->add('firstName', TextType::class, [
-                'label' => 'first_name',
+                'label' => 'admin.label.first_name',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'validation.is_blank'
@@ -112,7 +119,7 @@ final class UserAdmin extends AbstractAdmin
                 ],
             ])
             ->add('lastName', TextType::class, [
-                'label' => 'last_name',
+                'label' => 'admin.label.last_name',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'validation.is_blank'
@@ -120,15 +127,19 @@ final class UserAdmin extends AbstractAdmin
                 ]
             ])
             ->add('university', TextType::class, [
+                'label' => 'admin.label.university',
                 'required' => false
             ])
             ->add('favoriteLanguage', TextType::class, [
+                'label' => 'admin.label.favorite_language',
                 'required' => false
             ])
             ->add('interests', TextType::class, [
+                'label' => 'admin.label.intereset',
                 'required' => false
             ])
             ->add('about', TextareaType::class, [
+                'label' => 'admin.label.about',
                 'required' => false
             ])
             ->end();
@@ -137,27 +148,59 @@ final class UserAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('username')
-            ->add('email')
-            ->add('firstName')
-            ->add('lastName')
-            ->add('registrationDate')
-            ->add('active')
-            ->add('verified');
+            ->add('id', null, [
+                'label' => 'admin.label.id'
+            ])
+            ->add('username', null, [
+                'label' => 'admin.label.username'
+            ])
+            ->add('email', null, [
+                'label' => 'admin.label.email'
+            ])
+            ->add('firstName', null, [
+                'label' => 'admin.label.first_name'
+            ])
+            ->add('lastName', null, [
+                'label' => 'admin.label.last_name'
+            ])
+            ->add('registrationDate', null, [
+                'label' => 'admin.label.registration_date'
+            ])
+            ->add('active', null, [
+                'label' => 'admin.label.active'
+            ])
+            ->add('verified', null, [
+                'label' => 'admin.label.verified'
+            ]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('id')
-            ->addIdentifier('username')
-            ->add('active')
-            ->add('verified')
-            ->add('email')
-            ->add('firstName')
-            ->add('lastName')
-            ->add('registrationDate');
+            ->addIdentifier('id', NumberType::class, [
+                'label' => 'admin.label.id'
+            ])
+            ->addIdentifier('username', TextType::class, [
+                'label' => 'admin.label.username'
+            ])
+            ->add('active', '', [
+                'label' => 'admin.label.active'
+            ])
+            ->add('verified', '', [
+                'label' => 'admin.label.verified'
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'admin.label.email'
+            ])
+            ->add('firstName', TextType::class, [
+                'label' => 'admin.label.first_name'
+            ])
+            ->add('lastName', TextType::class, [
+                'label' => 'admin.label.last_name'
+            ])
+            ->add('registrationDate', '', [
+                'label' => 'admin.label.registration_date'
+            ]);
     }
 
     public function getExportFields()

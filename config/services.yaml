@@ -33,10 +33,10 @@ services:
         class: App\Admin\UserAdmin
         arguments: [~, App\Entity\User, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Users, group: User }
+            - { name: sonata.admin, manager_type: orm, label: admin.label.users, group: admin.group.user }
 
     admin.role:
         class: App\Admin\RoleAdmin
         arguments: [~, App\Entity\Role, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Roles, group: User }
+            - { name: sonata.admin, manager_type: orm, label: admin.label.roles, group: admin.group.user }
