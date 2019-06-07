@@ -1,0 +1,6 @@
+admin:
+  group:
+    user: 'User'
+  label:
+    users: 'Users'
+    roles: 'Roles'
