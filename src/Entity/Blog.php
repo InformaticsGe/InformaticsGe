@@ -48,10 +48,16 @@ class Blog
      */
     private $updatedOn;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $published;
+
     public function __construct()
     {
         $this->createdOn = new DateTime();
         $this->updatedOn = new DateTime();
+        $this->published = true;
     }
 
     public function getId(): ?int
@@ -127,6 +133,18 @@ class Blog
     public function setUpdatedOn(\DateTimeInterface $updatedOn): self
     {
         $this->updatedOn = $updatedOn;
+
+        return $this;
+    }
+
+    public function isPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(bool $published): self
+    {
+        $this->published = $published;
 
         return $this;
     }

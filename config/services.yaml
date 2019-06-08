@@ -40,3 +40,9 @@ services:
         arguments: [~, App\Entity\Role, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.roles, group: admin.group.user }
+
+    admin.blog:
+        class: App\Admin\BlogAdmin
+        arguments: [~, App\Entity\Blog, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.blogs, group: admin.group.content }

@@ -23,6 +23,11 @@ use Symfony\Component\Validator\Constraints\Regex;
 final class UserAdmin extends AbstractAdmin
 {
 
+    protected $datagridValues = [
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'id',
+    ];
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $container = $this->getConfigurationPool()
@@ -48,7 +53,7 @@ final class UserAdmin extends AbstractAdmin
         $formMapper
             ->with('admin.group.account', [
                 'class' => 'col-md-6',
-                'box_class'   => 'box box-danger',
+                'box_class' => 'box box-danger',
             ])
             ->add('username', TextType::class, [
                 'label' => 'admin.label.username',
