@@ -5,6 +5,7 @@ namespace App\Admin;
 use App\Entity\Blog;
 use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -79,7 +80,7 @@ final class BlogAdmin extends AbstractAdmin
                 'label' => 'admin.label.tags',
                 'required' => false,
             ])
-            ->add('body', TextareaType::class, [
+            ->add('body', CKEditorType::class, [
                 'label' => 'admin.label.body',
             ])
             ->end()
