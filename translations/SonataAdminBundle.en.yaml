@@ -1,6 +1,7 @@
 admin:
   group:
     user: 'User'
+    content: 'Content'
   label:
     users: 'Users'
     roles: 'Roles'
