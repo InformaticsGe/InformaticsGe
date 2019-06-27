@@ -39,6 +39,13 @@ reset:
   username_or_email: 'Username or E-Mail'
 yes: 'Yes'
 no: 'No'
+news_blog: 'News Blog'
+tags: 'Tags'
+read_more: 'Read more'
+rating: 'Rating'
+work_in_progress: 'Work in progress'
+ads: 'Advertisement'
+comments: 'Comments'
 
 # Admin panel
 admin_panel: 'Admin panel'

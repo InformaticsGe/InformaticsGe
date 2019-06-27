@@ -39,6 +39,13 @@ reset:
   username_or_email: 'მომხმარებლის სახელი ან ელ.ფოსტა'
 yes: 'კი'
 no: 'არა'
+news_blog: 'სიახლეების ბლოგი'
+tags: 'თეგები'
+read_more: 'სრულად ნახვა'
+rating: 'რეიტინგი'
+work_in_progress: 'მზადების პროცესშია'
+ads: 'რეკლამა'
+comments: 'კომენტარები'
 
 # Admin panel
 admin_panel: 'ადმინ პანელი'
