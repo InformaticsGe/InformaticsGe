@@ -23,12 +23,21 @@ class BlogRepository extends ServiceEntityRepository
     /**
      * Get query builder.
      *
+     * @param array $params Parameters for query.
+     *
      * @return QueryBuilder
      */
-    public function getQueryBuilder(): QueryBuilder
+    public function getQueryBuilder(array $params): QueryBuilder
     {
-        return $this->createQueryBuilder('b')
-            ->orderBy('b.createdOn', 'DESC');
+        $queryBuilder = $this->createQueryBuilder('b');
+
+        // Filter by tags.
+        if (array_key_exists('tag', $params)) {
+            $queryBuilder->where('b.tags like :tag')
+                ->setParameter(':tag', "%{$params['tag']}%");
+        }
+
+        return $queryBuilder->orderBy('b.createdOn', 'DESC');
     }
 
     // /**

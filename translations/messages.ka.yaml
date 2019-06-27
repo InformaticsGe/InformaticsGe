@@ -46,6 +46,12 @@ rating: 'რეიტინგი'
 work_in_progress: 'მზადების პროცესშია'
 ads: 'რეკლამა'
 comments: 'კომენტარები'
+filtered_by_tag: 'გაფილტრულია თაგით <b>%tag%</b>'
+reset_filter: 'ფილტრის გაუქმება'
+
+# Errors and Exceptions
+blogs_not_found: 'ბლოგების სია ცარიელია'
+blog_not_found: 'ბლოგი ID-თ %blog_id% ვერ მოიძებნა!'
 
 # Admin panel
 admin_panel: 'ადმინ პანელი'
@@ -89,4 +95,3 @@ Blog List: 'ბლოგების სია'
 User Create: 'მომხმარებლის შექმნა'
 Role Create: 'როლის შექმნა'
 Blog Create: 'ბლოგის შექმნა'
-

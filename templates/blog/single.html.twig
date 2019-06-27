@@ -37,7 +37,9 @@
                     <p>
                         {{ 'tags'|trans }}:
                         {% for tag in blog.tags|split(',') %}
-                            <span class="label label-{{ random(tagStyles) }}">{{ tag|trim }}</span>
+                            <a href="{{ path('index', { 'tag': tag|trim|url_encode }) }}" class="tag-link">
+                                <span class="label label-{{ random(tagStyles) }}">{{ tag|trim }}</span>
+                            </a>
                         {% endfor %}
                     </p>
                 {% endif %}

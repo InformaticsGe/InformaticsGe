@@ -46,6 +46,12 @@ rating: 'Rating'
 work_in_progress: 'Work in progress'
 ads: 'Advertisement'
 comments: 'Comments'
+filtered_by_tag: 'Filtered by tag <b>%tag%</b>'
+reset_filter: 'Reset filter'
+
+# Errors and Exceptions
+blogs_not_found: 'Blogs not found'
+blog_not_found: 'Blog with ID %blog_id% not found!'
 
 # Admin panel
 admin_panel: 'Admin panel'

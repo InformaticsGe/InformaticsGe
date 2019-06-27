@@ -1283,3 +1283,8 @@ a.socialIcon:hover, .socialHoverClass {
 .invalid-feedback {
     color: red;
 }
+
+.tag-link:hover {
+    text-decoration: none !important;
+    font-size: 18px;
+}
