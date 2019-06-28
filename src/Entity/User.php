@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -188,7 +189,7 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-         $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getEmail(): ?string
@@ -322,4 +323,10 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->username;
+    }
+
 }

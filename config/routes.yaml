@@ -1,10 +1,22 @@
 index:
-  path: /{_locale}
-  controller: App\Controller\DefaultController::index
+  path: /{_locale}/{page}
+  controller: App\Controller\BlogController::list
   defaults:
     _locale: ka
+    page: 1
   requirements:
     _locale:  ka|en
+    page: \d+
+
+single_blog:
+  path: /{_locale}/blog/{id}
+  controller: App\Controller\BlogController::single
+  defaults:
+    _locale: ka
+    page: 1
+  requirements:
+    _locale:  ka|en
+    page: \d+
 
 about:
   path: /{_locale}/about

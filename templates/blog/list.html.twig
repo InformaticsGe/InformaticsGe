@@ -1,0 +1,91 @@
+{#
+/**
+  * @file
+  * Homepage (Blog) template.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_path: Current URL (Path).
+  * - current_locale: Current language code.
+  * - pagination: Pagination interface with blogs.
+  */
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'homepage'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="col-md-12">
+        <div class="header-section text-center">
+            <h2>Informatics.ge</h2>
+            <p>{{ 'news_blog'|trans }}</p>
+            <hr class="bottom-line">
+        </div>
+
+        <div class="col-sm-8">
+            {% set tagStyles = [
+                'default',
+                'primary',
+                'success',
+                'info',
+                'warning',
+                'danger',
+            ] %}
+
+            {% if pagination.getTotalItemCount %}
+                {% if app.request.query.has('tag') %}
+                    <div>
+                        <p>{{ 'filtered_by_tag'|trans({'%tag%': app.request.query.get('tag')})|raw }}</p>
+                        <a href="{{ path('index') }}">{{ 'reset_filter'|trans }}</a>
+                    </div>
+                {% endif %}
+
+                {% for blog in pagination %}
+                    <div class="card mb-4 blog">
+                        <div class="card-body">
+                            <h2 class="card-title"><a href="{{ path('single_blog', {'id': blog.id}) }}">{{ blog.title }}</a>
+                            </h2>
+
+                            <i class="fa fa-user">&nbsp;<a href="#">{{ blog.author }}</a></i> |
+                            <i class="fa fa-calendar">&nbsp;{{ blog.createdOn|date('d/m/Y H:i') }}</i>
+
+                            {% if blog.tags is not empty %}
+                                <p>
+                                    {{ 'tags'|trans }}:
+                                    {% for tag in blog.tags|split(',') %}
+                                        <a href="{{ path('index', { 'tag': tag|trim|url_encode }) }}" class="tag-link">
+                                            <span class="label label-{{ random(tagStyles) }}">{{ tag|trim }}</span>
+                                        </a>
+                                    {% endfor %}
+                                </p>
+                            {% endif %}
+
+                            <br/>
+
+                            <div class="card-text pb">
+                                {{ blog.body|preview|raw }}
+                            </div>
+
+                            <br/>
+
+                            <a href="{{ path('single_blog', {'id': blog.id}) }}"
+                               class="btn btn-danger">{{ 'read_more'|trans }} &rarr;</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="header-section text-center">
+                    <h2>{{ 'blogs_not_found'|trans }}</h2>
+                </div>
+            {% endif %}
+
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-md-4">
+            {% include 'layouts/sidebar.html.twig' %}
+        </div>
+        <!--/ Sidebar -->
+    </div>
+{% endblock %}
