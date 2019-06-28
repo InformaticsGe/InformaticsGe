@@ -84,6 +84,7 @@ admin:
     tags: 'თეგები'
     body: 'ტანი'
     blogs: 'ბლოგი'
+    actions: 'მოქმედებები'
   group:
     account: 'ინფორმაცია ექაუნთზე'
     personal: 'პერსონალური ინფორმაცია'

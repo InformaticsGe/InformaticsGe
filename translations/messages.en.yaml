@@ -84,6 +84,7 @@ admin:
     tags: 'Tags'
     body: 'Body'
     blogs: 'Blog'
+    actions: 'Actions'
   group:
     account: 'Account information'
     personal: 'Personal information'

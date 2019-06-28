@@ -72,6 +72,13 @@ final class RoleAdmin extends AbstractAdmin
             ])
             ->add('titleEN', TextType::class, [
                 'label' => 'admin.label.title_en'
+            ])
+            ->add('_action', null, [
+                'label' => 'admin.label.actions',
+                'actions' => [
+                    'edit' => [],
+                    'delete' => [],
+                ]
             ]);
     }
 

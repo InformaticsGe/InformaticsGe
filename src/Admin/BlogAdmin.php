@@ -142,8 +142,7 @@ final class BlogAdmin extends AbstractAdmin
                 'label' => 'admin.label.id'
             ])
             ->addIdentifier('title', NumberType::class, [
-                'label' => 'admin.label.title',
-                'route' => ['name' => 'show']
+                'label' => 'admin.label.title'
             ])
             ->add('published', '', [
                 'label' => 'admin.label.published'
@@ -157,6 +156,14 @@ final class BlogAdmin extends AbstractAdmin
             ])
             ->add('updatedOn', '', [
                 'label' => 'admin.label.updated_on'
+            ])
+            ->add('_action', null, [
+                'label' => 'admin.label.actions',
+                'actions' => [
+                    'show' => [],
+                    'edit' => [],
+                    'delete' => [],
+                ]
             ]);
     }
 

@@ -205,6 +205,13 @@ final class UserAdmin extends AbstractAdmin
             ])
             ->add('registrationDate', '', [
                 'label' => 'admin.label.registration_date'
+            ])
+            ->add('_action', null, [
+                'label' => 'admin.label.actions',
+                'actions' => [
+                    'edit' => [],
+                    'delete' => [],
+                ]
             ]);
     }
 
