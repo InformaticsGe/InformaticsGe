@@ -1,0 +1,84 @@
+{#
+/**
+  * @file
+  * Template for Material Algoritms listing page.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_path: Current URL (Path).
+  * - current_locale: Current language code.
+  * - algorithms: Algoithms Entity collection.
+  */
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'materials_algorithms'|trans }}{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#material_algorithms').DataTable({
+                "autoWidth": false,
+                "responsive": true,
+                "lengthMenu": [[50, 100, 150, -1], [50, 100, 150, "{{ 'datatable_all'|trans }}"]],
+                "order": [],
+                "language": {
+                    "lengthMenu": "{{ 'datatable_length_menu'|trans({'%type%': 'algorithm'|trans }) }}",
+                    "search": "{{ 'datatable_search'|trans({'%type%': 'algorithm'|trans }) }}",
+                    "sInfo": "{{ 'datatable_info'|trans }}",
+                    "sInfoEmpty": "{{ 'datatable_info_empty'|trans }}",
+                    "sInfoFiltered": "{{ 'datatable_filtered'|trans }}",
+                    "zeroRecords": "{{ 'datatable_zero_record'|trans }}",
+                    "paginate": {
+                        "previous": "{{ 'datatable_previous'|trans }}",
+                        "next": "{{ 'datatable_next'|trans }}"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="header-section text-center">
+        <h2>{{ 'materials_algorithms'|trans }}</h2>
+        <p>{{ 'materials_algorithms_description'|trans }}</p>
+        <hr class="bottom-line">
+    </div>
+
+    <table class="table tablelink table-striped table-bordered table-responsive" id="material_algorithms">
+        <thead>
+        <tr>
+            <th>{{ 'algorithm'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for algorithm in algorithms %}
+            <tr>
+                <td>
+                    <a href="/uploads/algorithms/{{ algorithm.filename }}" title="შენახვა" download="">
+                        <i class="fa fa-download"></i> {{ algorithm.title }}
+                    </a>
+
+                    {% if algorithm.tags is not empty %}
+                        <span class="row-tags">
+                            {% for tag in algorithm.tags|split(',') %}
+                                <a href="{{ path('material_algorithms', { 'tag': tag|trim|url_encode }) }}">
+                                {{ tag }}</a>{{ not loop.last ? ', ' : '' }}
+                            {% endfor %}
+                        </span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

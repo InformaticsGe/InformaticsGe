@@ -19,6 +19,30 @@ class MaterialAlgorithmRepository extends ServiceEntityRepository
         parent::__construct($registry, MaterialAlgorithm::class);
     }
 
+    /**
+     * Get Problems list.
+     *
+     * @param array $parameters Parameters for query.
+     *
+     * @return array
+     */
+    public function getList(array $parameters)
+    {
+        $queryBuilder = $this->createQueryBuilder('m');
+
+        // Filter by tags.
+        if (array_key_exists('tag', $parameters)) {
+            $queryBuilder->where('m.tags like :tag')
+                ->setParameter(':tag', "%{$parameters['tag']}%");
+        }
+
+        $result = $queryBuilder->orderBy('m.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $result;
+    }
+
     // /**
     //  * @return MaterialAlgorithm[] Returns an array of MaterialAlgorithm objects
     //  */

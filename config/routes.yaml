@@ -95,3 +95,11 @@ material_single_problem:
   requirements:
     _locale:  ka|en
     id: \d+
+
+material_algorithms:
+  path: /{_locale}/material/algorithms
+  controller: App\Controller\MaterialController::algorithmsList
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en

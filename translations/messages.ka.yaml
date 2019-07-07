@@ -51,6 +51,7 @@ reset_filter: 'ფილტრის გაუქმება'
 this_problem_on_codeforces: 'ეს ამოცანა Codeforces-ზე'
 problem: 'ამოცანა'
 analyse: 'ანალიზი'
+algorithm: 'ალგორითმი'
 title: 'სათაური'
 
 # Datatable

@@ -51,6 +51,7 @@ reset_filter: 'Reset filter'
 this_problem_on_codeforces: 'This problem on Codeforces'
 problem: 'Problem'
 analyse: 'Analyse'
+algorithm: 'Algorithm'
 title: 'Title'
 
 # Datatable
