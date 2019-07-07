@@ -51,4 +51,11 @@ services:
         class: App\Admin\MaterialProblemAdmin
         arguments: [~, App\Entity\MaterialProblem, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin.label.material_problem, label: admin.group.material }
+            - { name: sonata.admin, manager_type: orm, label: admin.label.material_problem, group: admin.group.material }
+
+    admin.material_algorithm:
+        class: App\Admin\MaterialAlgorithmAdmin
+        arguments: [~, App\Entity\MaterialAlgorithm, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.material_algorithm, group: admin.group.material }
+

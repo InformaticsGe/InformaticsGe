@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace App\Admin;
 
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use App\Entity\MaterialAlgorithm;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\Form\Validator\ErrorElement;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
-final class MaterialProblemAdmin extends AbstractAdmin
+final class MaterialAlgorithmAdmin extends AbstractAdmin
 {
 
     protected $datagridValues = [
@@ -27,10 +29,7 @@ final class MaterialProblemAdmin extends AbstractAdmin
             ->add('id')
             ->add('title')
             ->add('tags')
-            ->add('url')
-            ->add('urlTitle')
-            ->add('problem')
-            ->add('analyse');
+            ->add('filename');
     }
 
     protected function configureListFields(ListMapper $listMapper): void
@@ -45,8 +44,8 @@ final class MaterialProblemAdmin extends AbstractAdmin
             ->add('tags', TextType::class, [
                 'label' => 'admin.label.tags'
             ])
-            ->add('url', UrlType::class, [
-                'label' => 'admin.label.url'
+            ->add('filename', TextType::class, [
+                'label' => 'admin.label.filename'
             ])
             ->add('_action', null, [
                 'label' => 'admin.label.actions',
@@ -67,20 +66,53 @@ final class MaterialProblemAdmin extends AbstractAdmin
                 'label' => 'admin.label.tags',
                 'required' => false,
             ])
-            ->add('url', UrlType::class, [
-                'label' => 'admin.label.url',
-                'required' => false,
-            ])
-            ->add('urlTitle', TextType::class, [
-                'label' => 'admin.label.url_title',
-                'data' => $this->trans('this_problem_on_codeforces', [], 'messages'),
-                'required' => false,
-            ])
-            ->add('problem', CKEditorType::class, [
-                'label' => 'admin.label.problem',
-            ])
-            ->add('analyse', CKEditorType::class, [
-                'label' => 'admin.label.analyse',
+            ->add('file', FileType::class, [
+                'label' => 'admin.label.file',
+                'required' => false
             ]);
     }
+
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        /** @var MaterialAlgorithm $object */
+        if (
+            null === $object->getId()
+            && null === $object->getFilename()
+        ) {
+            $errorElement
+                ->with('file')
+                ->assertNotNull(array())
+                ->end();
+        }
+
+        parent::validate($errorElement, $object);
+    }
+
+    public function preRemove($object)
+    {
+        /** @var MaterialAlgorithm $object */
+        $this->_removeFile($object->getFilename());
+
+        parent::preRemove($object);
+    }
+
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+        unset($actions['delete']);
+
+        return $actions;
+    }
+
+    private function _removeFile(string $fileName): void
+    {
+        $filePath = __DIR__ . '/../../public/uploads/algorithms' . '/' . $fileName;
+
+        $filesystem = new Filesystem();
+
+        if ($filesystem->exists($filePath)) {
+            $filesystem->remove($filePath);
+        }
+    }
+
 }
