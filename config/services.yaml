@@ -46,3 +46,16 @@ services:
         arguments: [~, App\Entity\Blog, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.blogs, group: admin.group.content }
+
+    admin.material_problem:
+        class: App\Admin\MaterialProblemAdmin
+        arguments: [~, App\Entity\MaterialProblem, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.material_problem, group: admin.group.material }
+
+    admin.material_algorithm:
+        class: App\Admin\MaterialAlgorithmAdmin
+        arguments: [~, App\Entity\MaterialAlgorithm, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.material_algorithm, group: admin.group.material }
+

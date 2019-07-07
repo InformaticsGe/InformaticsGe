@@ -76,6 +76,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="{{ current_route == 'index' ? 'active' : '' }}"><a
                             href="{{ url('index') }}">{{ 'homepage'|trans }}</a></li>
+                <li class="{{ current_route in ['material_index', 'material_problems', 'material_single_problem', 'material_algorithms'] ? 'active' : '' }}">
+                    <a href="{{ url('material_index') }}">{{ 'materials'|trans }}</a></li>
                 <li class="{{ current_route == 'about' ? 'active' : '' }}"><a
                             href="{{ url('about') }}">{{ 'we'|trans }}</a></li>
 
@@ -203,7 +205,7 @@
             <p><a href="https://old.informatics.ge">{{ 'site_old_version'|trans }}</a></p>
             <p>
                 Create with <span style="color: red;">♥</span> By
-                <a href="http://www.abgeo.ga/" target="_blank">ABGEO</a>
+                <a href="https://www.abgeo.dev/" target="_blank">ABGEO</a>
             </p>
         </div>
     </div>

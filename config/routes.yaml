@@ -69,3 +69,37 @@ password_reset:
     _locale: ka
   requirements:
     _locale:  ka|en
+
+# Material
+material_index:
+  path: /{_locale}/material
+  controller: App\Controller\MaterialController::index
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
+
+material_problems:
+  path: /{_locale}/material/problems
+  controller: App\Controller\MaterialController::problemsList
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
+
+material_single_problem:
+  path: /{_locale}/material/problem/{id}
+  controller: App\Controller\MaterialController::singleProblem
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
+    id: \d+
+
+material_algorithms:
+  path: /{_locale}/material/algorithms
+  controller: App\Controller\MaterialController::algorithmsList
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en

@@ -1,0 +1,48 @@
+{#
+/**
+  * @file
+  * Template for Materials index page.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_path: Current URL (Path).
+  * - current_locale: Current language code.
+  */
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'materials'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="header-section text-center">
+        <h2>{{ 'materials'|trans }}</h2>
+        <p>{{ 'materials_description'|trans }}</p>
+        <hr class="bottom-line">
+    </div>
+
+    <div class="col-md-12 text-center">
+        <div class="col-md-6">
+            <div class="card box-shadow">
+                <div class="card-header">
+                    <h4>{{ 'materials_problems'|trans }}</h4>
+                </div>
+                <div class="card-body">
+                    <p>{{ 'materials_problems_description'|trans }}</p>
+                    <a href="{{ path('material_problems') }}" class="btn btn-block btn-danger">{{ 'btn_go'|trans }} &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card box-shadow">
+                <div class="card-header">
+                    <h4>{{ 'materials_algorithms'|trans }}</h4>
+                </div>
+                <div class="card-body">
+                    <p>{{ 'materials_algorithms_description'|trans }}</p>
+                    <a href="{{ path('material_algorithms') }}" class="btn btn-block btn-danger">{{ 'btn_go'|trans }} &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
