@@ -76,8 +76,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="{{ current_route == 'index' ? 'active' : '' }}"><a
                             href="{{ url('index') }}">{{ 'homepage'|trans }}</a></li>
-                <li class="{{ current_route == 'material_index' ? 'active' : '' }}"><a
-                            href="{{ url('material_index') }}">{{ 'materials'|trans }}</a></li>
+                <li class="{{ current_route in ['material_index', 'material_problems', 'material_single_problem'] ? 'active' : '' }}">
+                    <a href="{{ url('material_index') }}">{{ 'materials'|trans }}</a></li>
                 <li class="{{ current_route == 'about' ? 'active' : '' }}"><a
                             href="{{ url('about') }}">{{ 'we'|trans }}</a></li>
 

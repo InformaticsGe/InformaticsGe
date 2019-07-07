@@ -50,6 +50,7 @@ filtered_by_tag: 'Filtered by tag <b>%tag%</b>'
 reset_filter: 'Reset filter'
 this_problem_on_codeforces: 'This problem on Codeforces'
 problem: 'Problem'
+analyse: 'Analyse'
 title: 'Title'
 
 # Datatable
@@ -75,6 +76,7 @@ btn_go: 'Go'
 # Errors and Exceptions
 blogs_not_found: 'Blogs not found'
 blog_not_found: 'Blog with ID %blog_id% not found!'
+problem_not_found: 'Problem with ID %problem_id% not found!'
 
 # Admin panel
 admin_panel: 'Admin panel'

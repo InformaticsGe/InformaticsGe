@@ -86,3 +86,12 @@ material_problems:
     _locale: ka
   requirements:
     _locale:  ka|en
+
+material_single_problem:
+  path: /{_locale}/material/problem/{id}
+  controller: App\Controller\MaterialController::singleProblem
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
+    id: \d+

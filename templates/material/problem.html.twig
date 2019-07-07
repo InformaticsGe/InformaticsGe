@@ -1,0 +1,57 @@
+{#
+/**
+  * @file
+  * Template for Single Material Problems page.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_path: Current URL (Path).
+  * - current_locale: Current language code.
+  * - problem: Problem entity.
+  */
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'materials_problems'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="header-section text-center">
+        <h2>{{ problem.title }}</h2>
+        {% if problem.tags is not empty %}
+            <p>
+                {{ 'tags'|trans }}:
+                {% for tag in problem.tags|split(',') %}
+                <a href="{{ path('material_problems', { 'tag': tag|trim|url_encode }) }}">
+                    {{ tag }}</a>{{ not loop.last ? ', ' : '' }}
+                {% endfor %}
+            </p>
+        {% endif %}
+        <hr class="bottom-line">
+    </div>
+
+    <div class="col-md-12">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#problem">{{ 'problem'|trans }}</a></li>
+            <li><a data-toggle="tab" href="#analyse">{{ 'analyse'|trans }}</a></li>
+            {% if problem.url is not empty %}
+                <li>
+                    <a href="{{ problem.url }}" target="_blank">
+                        {{ problem.urlTitle }}
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+
+        <div class="tab-content">
+            <div id="problem" class="tab-pane fade in active">
+                <br/>
+                {{ problem.problem|raw }}
+            </div>
+
+            <div id="analyse" class="tab-pane fade">
+                <br/>
+                {{ problem.analyse|raw }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
