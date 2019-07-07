@@ -49,6 +49,19 @@ comments: 'კომენტარები'
 filtered_by_tag: 'გაფილტრულია თაგით <b>%tag%</b>'
 reset_filter: 'ფილტრის გაუქმება'
 this_problem_on_codeforces: 'ეს ამოცანა Codeforces-ზე'
+problem: 'ამოცანა'
+title: 'სათაური'
+
+# Datatable
+datatable_all: 'ყველა'
+datatable_length_menu: 'ერთ გვერდზე აჩვენე _MENU_ %type%'
+datatable_search: 'მოძებნე %type%:'
+datatable_info: 'ნაჩვენებია _START_-_END_ _TOTAL_-დან'
+datatable_info_empty: 'ნაჩვენებია 0-0 0-დან'
+datatable_filtered: '(გაფილტრულია _MAX_-დან)'
+datatable_zero_record: 'საჩვენებელი არაფერია'
+datatable_previous: 'წინა'
+datatable_next: 'მომდევნო'
 
 # Materials
 materials: 'მასალები'

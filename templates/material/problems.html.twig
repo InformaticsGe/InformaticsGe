@@ -1,0 +1,73 @@
+{#
+/**
+  * @file
+  * Template for Material Problems listing page.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_path: Current URL (Path).
+  * - current_locale: Current language code.
+  * - problems: Problems Entity collection.
+  */
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'materials_problems'|trans }}{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#material_problems').DataTable({
+                "autoWidth": false,
+                "responsive": true,
+                "lengthMenu": [[50, 100, 150, -1], [50, 100, 150, "{{ 'datatable_all'|trans }}"]],
+                "order": [[0, "desc"]],
+                "language": {
+                    "lengthMenu": "{{ 'datatable_length_menu'|trans({'%type%': 'problem'|trans }) }}",
+                    "search": "{{ 'datatable_search'|trans({'%type%': 'problem'|trans }) }}",
+                    "sInfo": "{{ 'datatable_info'|trans }}",
+                    "sInfoEmpty": "{{ 'datatable_info_empty'|trans }}",
+                    "sInfoFiltered": "{{ 'datatable_filtered'|trans }}",
+                    "zeroRecords": "{{ 'datatable_zero_record'|trans }}",
+                    "paginate": {
+                        "previous": "{{ 'datatable_previous'|trans }}",
+                        "next": "{{ 'datatable_next'|trans }}"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="header-section text-center">
+        <h2>{{ 'materials_problems'|trans }}</h2>
+        <p>{{ 'materials_problems_description'|trans }}</p>
+        <hr class="bottom-line">
+    </div>
+
+    <table class="table tablelink table-striped table-bordered table-responsive" id="material_problems">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>{{ 'title'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for problem in problems %}
+            <tr>
+                <td><a href="#">{{ problem.id }}</a></td>
+                <td><a href="#">{{ problem.title }}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
