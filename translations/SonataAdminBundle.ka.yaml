@@ -2,6 +2,7 @@ admin:
   group:
     user: 'მომხმარებელი'
     content: 'კონტენტი'
+    material: 'მასალა'
   label:
     users: 'მომხმარებელი'
     roles: 'როლები'
