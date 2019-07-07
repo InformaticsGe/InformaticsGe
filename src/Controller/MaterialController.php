@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\MaterialProblemRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class MaterialController extends AbstractController
 {
@@ -13,12 +14,17 @@ class MaterialController extends AbstractController
         return $this->render('material/index.html.twig');
     }
 
-    public function problemsList(MaterialProblemRepository $repository)
+    public function problemsList(MaterialProblemRepository $repository, Request $request)
     {
-        $problems = $repository->findAll();
+        $parameters = [];
+
+        // Filter by tags.
+        if ($tag = $request->query->get('tag')) {
+            $parameters['tag'] = urldecode($tag);
+        }
 
         return $this->render('material/problems.html.twig', [
-            'problems' => $problems
+            'problems' => $repository->getList($parameters)
         ]);
     }
 
