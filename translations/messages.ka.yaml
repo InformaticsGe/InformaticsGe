@@ -50,6 +50,15 @@ filtered_by_tag: 'გაფილტრულია თაგით <b>%tag%</b>
 reset_filter: 'ფილტრის გაუქმება'
 this_problem_on_codeforces: 'ეს ამოცანა Codeforces-ზე'
 
+# Materials
+materials: 'მასალები'
+materials_description: 'ეს გვერდი განკუთვნილია პროგრამირების შემსწავლელთათვის.'
+materials_problems: 'ამოცანები და გარჩევები'
+materials_problems_description: 'ამ სექციაში იხილავთ ამოცანებს და გარჩევებს. ასევე შეძლებთ მათ ამოხსნას.'
+materials_algorithms: 'ალგორითმები'
+materials_algorithms_description: 'აქ წარმოდგენილია სხვადასხვა ალგორითმები წიგნებისა და პრეზენტაციებვის სახით.'
+btn_go: 'გადასვლა'
+
 # Errors and Exceptions
 blogs_not_found: 'ბლოგების სია ცარიელია'
 blog_not_found: 'ბლოგი ID-თ %blog_id% ვერ მოიძებნა!'

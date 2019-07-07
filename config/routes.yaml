@@ -69,3 +69,12 @@ password_reset:
     _locale: ka
   requirements:
     _locale:  ka|en
+
+# Material
+material_index:
+  path: /{_locale}/material
+  controller: App\Controller\MaterialController::index
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en

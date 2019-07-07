@@ -14,8 +14,6 @@ class DefaultController extends AbstractController
      */
     public function about()
     {
-        return $this->render('default/about.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
+        return $this->render('default/about.html.twig');
     }
 }

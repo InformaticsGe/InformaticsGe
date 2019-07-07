@@ -50,6 +50,15 @@ filtered_by_tag: 'Filtered by tag <b>%tag%</b>'
 reset_filter: 'Reset filter'
 this_problem_on_codeforces: 'This problem on Codeforces'
 
+# Materials
+materials: 'Materials'
+materials_description: 'This page is intended for beginner programmers.'
+materials_problems: 'Problems & Analyzes'
+materials_problems_description: 'In this section you will see the Problems and Analyzes. You can also solve them.'
+materials_algorithms: 'Algorithms'
+materials_algorithms_description: 'Here are presented various algorithms as books and presentations.'
+btn_go: 'Go'
+
 # Errors and Exceptions
 blogs_not_found: 'Blogs not found'
 blog_not_found: 'Blog with ID %blog_id% not found!'
