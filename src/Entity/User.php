@@ -96,6 +96,11 @@ class User implements UserInterface
      */
     private $active;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $city;
+
     public function __construct()
     {
         $this->avatar = 'avatar1.png';
@@ -327,6 +332,18 @@ class User implements UserInterface
     public function __toString(): string
     {
         return $this->username;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
     }
 
 }

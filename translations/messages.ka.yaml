@@ -104,6 +104,7 @@ admin:
     password: 'პაროლი'
     repeat_password: 'გაიმეორეთ პაროლი'
     university: 'უნივერსიტეტი'
+    city: 'ქალაქი'
     favorite_language: 'საყვარელი ენა'
     intereset: 'ინტერესები'
     about: 'შესახებ'

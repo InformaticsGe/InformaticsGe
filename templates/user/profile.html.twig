@@ -77,15 +77,15 @@
                     <table class="table borderless">
                         <tr>
                             <td><b>{{ 'city'|trans }}</b></td>
-                            <td><i>{city}</i></td>
+                            <td><i>{{ user.city ?: '-' }}</i></td>
                         </tr>
                         <tr>
                             <td><b>{{ 'school'|trans }}</b></td>
-                            <td><i>{{ user.university }}</i></td>
+                            <td><i>{{ user.university ?: '-' }}</i></td>
                         </tr>
                         <tr>
                             <td><b>{{ 'favorite_language'|trans }}</b></td>
-                            <td><i>{{ user.favoriteLanguage }}</i></td>
+                            <td><i>{{ user.favoriteLanguage ?: '-' }}</i></td>
                         </tr>
                         <tr>
                             <td><b>{{ 'solved_problems_count'|trans }}</b></td>

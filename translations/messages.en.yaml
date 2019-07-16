@@ -104,6 +104,7 @@ admin:
     password: 'Password'
     repeat_password: 'Repeat password'
     university: 'University'
+    city: 'City'
     favorite_language: 'Favorite language'
     intereset: 'Interests'
     about: 'About'
