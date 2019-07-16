@@ -1,3 +1,15 @@
+{#
+/**
+  * @file
+  * User profile.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_path: Current URL (Path).
+  * - current_locale: Current language code.
+  * - user: Current user object.
+  */
+#}
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ user.firstName ~ ' ' ~ user.lastName }}{% endblock %}
