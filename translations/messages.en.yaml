@@ -53,6 +53,13 @@ problem: 'Problem'
 analyse: 'Analyse'
 algorithm: 'Algorithm'
 title: 'Title'
+about_me: 'About Me'
+interests: 'Interests'
+city: 'City'
+school: 'School'
+favorite_language: 'Favorite language'
+solved_problems_count: 'Solved problems count'
+registration_date: 'Registration date'
 
 # Datatable
 datatable_all: 'All'
@@ -78,6 +85,7 @@ btn_go: 'Go'
 blogs_not_found: 'Blogs not found'
 blog_not_found: 'Blog with ID %blog_id% not found!'
 problem_not_found: 'Problem with ID %problem_id% not found!'
+user_not_found: 'User %username% not found!'
 
 # Admin panel
 admin_panel: 'Admin panel'

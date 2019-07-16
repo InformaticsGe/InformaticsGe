@@ -53,6 +53,13 @@ problem: 'ამოცანა'
 analyse: 'ანალიზი'
 algorithm: 'ალგორითმი'
 title: 'სათაური'
+about_me: 'ჩემ შესახებ'
+interests: 'ინტერესები'
+city: 'ქალაქი'
+school: 'სასწავლებელი'
+favorite_language: 'საყვარელი ენა'
+solved_problems_count: 'ამოხსნილი ამოცანების რ-ბა'
+registration_date: 'რეგისტრაციის თარიღი'
 
 # Datatable
 datatable_all: 'ყველა'
@@ -78,6 +85,7 @@ btn_go: 'გადასვლა'
 blogs_not_found: 'ბლოგების სია ცარიელია'
 blog_not_found: 'ბლოგი ID-თ %blog_id% ვერ მოიძებნა!'
 problem_not_found: 'ამოცანა ID-თ %problem_id% ვერ მოიძებნა!'
+user_not_found: 'მომხმარებელი %username% ვერ მოიძებნა!'
 
 # Admin panel
 admin_panel: 'ადმინ პანელი'

@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ user.firstName ~ ' ' ~ user.lastName }}{% endblock %}
+
+{% block body %}
+    <br/><br/><br/>
+
+    {# User Sidebar #}
+    <div class="col-sm-3">
+        <div class="well text-center">
+            <div class="avatar">
+                <div>
+                    <figure>
+                        <img src="{{ asset('images/avatars/' ~ user.avatar) }}" class="img-circle" width="50%" alt="{{ user.username }}'s Avatar">
+                    </figure>
+                </div>
+            </div>
+
+            <h4>{{ user.username }}</h4>
+
+            <div class="alert alert-danger">
+                <p><strong>{{ 'about_me'|trans }}</strong></p>
+                <p>{{ user.about }}</p>
+            </div>
+
+            {% if user.interests is not empty %}
+                {% set interestStyles = [
+                    'default',
+                    'primary',
+                    'success',
+                    'info',
+                    'warning',
+                    'danger',
+                ] %}
+                <p>{{ 'interests'|trans }}</p>
+                <p>
+                    {% for interest in user.interests|split(',') %}
+                        <span class="label label-{{ random(interestStyles) }}">{{ interest|trim }}</span>
+                    {% endfor %}
+                </p>
+            {% endif %}
+
+            <!-- FB Buttons -->
+            <div class="col-sm-12">
+                <div class="col-sm-12">
+                    <div class="fb-save"
+                         data-uri="{{ current_path }}"
+                         data-size="large"></div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="fb-like"
+                         data-href="{{ current_path }}"
+                         data-layout="button_count"
+                         data-action="like"
+                         data-size="small"
+                         data-show-faces="true"
+                         data-share="true"></div>
+                </div>
+            </div>
+            <br/><br/>
+            <!--/ FB Buttons -->
+        </div>
+    </div>
+    {# End User Sidebar #}
+
+    {# User Content #}
+    <div class="col-sm-9">
+        <div class="well">
+            <div class="profile">
+                <div class="header-section text-center">
+                    <h3>{{ user.firstName ~ ' ' ~ user.lastName }}</h3>
+                    <hr class="bottom-line">
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table borderless">
+                        <tr>
+                            <td><b>{{ 'city'|trans }}</b></td>
+                            <td><i>{city}</i></td>
+                        </tr>
+                        <tr>
+                            <td><b>{{ 'school'|trans }}</b></td>
+                            <td><i>{{ user.university }}</i></td>
+                        </tr>
+                        <tr>
+                            <td><b>{{ 'favorite_language'|trans }}</b></td>
+                            <td><i>{{ user.favoriteLanguage }}</i></td>
+                        </tr>
+                        <tr>
+                            <td><b>{{ 'solved_problems_count'|trans }}</b></td>
+                            <td><i><a href="#">{count}</a></i></td>
+                        </tr>
+                        <tr>
+                            <td><b>{{ 'registration_date'|trans }}</b></td>
+                            <td><i>{{ user.registrationDate|date('d/m/Y') }}</i></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# End User Content #}
+{% endblock %}
