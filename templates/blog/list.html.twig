@@ -46,7 +46,7 @@
                             <h2 class="card-title"><a href="{{ path('single_blog', {'id': blog.id}) }}">{{ blog.title }}</a>
                             </h2>
 
-                            <i class="fa fa-user">&nbsp;<a href="#">{{ blog.author }}</a></i> |
+                            <i class="fa fa-user">&nbsp;<a href="{{ path('user_profile', { 'username': blog.author }) }}">{{ blog.author }}</a></i> |
                             <i class="fa fa-calendar">&nbsp;{{ blog.createdOn|date('d/m/Y H:i') }}</i>
 
                             {% if blog.tags is not empty %}

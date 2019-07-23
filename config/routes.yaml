@@ -103,3 +103,20 @@ material_algorithms:
     _locale: ka
   requirements:
     _locale:  ka|en
+
+# User
+user_profile:
+  path: /{_locale}/user/{username}
+  controller: App\Controller\UserController::profile
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
+
+edit_profile:
+  path: /{_locale}/edit-profile
+  controller: App\Controller\UserController::edit
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en

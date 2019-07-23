@@ -131,6 +131,10 @@ final class UserAdmin extends AbstractAdmin
                     ])
                 ]
             ])
+            ->add('city', TextType::class, [
+                'label' => 'admin.label.city',
+                'required' => false
+            ])
             ->add('university', TextType::class, [
                 'label' => 'admin.label.university',
                 'required' => false
@@ -167,6 +171,12 @@ final class UserAdmin extends AbstractAdmin
             ])
             ->add('lastName', null, [
                 'label' => 'admin.label.last_name'
+            ])
+            ->add('city', null, [
+                'label' => 'admin.label.city'
+            ])
+            ->add('university', null, [
+                'label' => 'admin.label.university'
             ])
             ->add('registrationDate', null, [
                 'label' => 'admin.label.registration_date'
