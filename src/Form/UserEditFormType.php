@@ -59,6 +59,9 @@ class UserEditFormType extends AbstractType
                 'label' => 'about_me',
                 'attr' => ['class' => 'form-control'],
                 'required' => false,
+                'config' => [
+                    'toolbar' => 'about_me'
+                ]
             ])
             ->add('interests', TextType::class, [
                 'label' => 'interests',

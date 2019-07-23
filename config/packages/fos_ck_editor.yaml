@@ -1,0 +1,4 @@
+fos_ck_editor:
+  toolbars:
+    configs:
+      about_me: [['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'Link', 'Unlink', '-', 'RemoveFormat', 'Undo', 'Redo']]
