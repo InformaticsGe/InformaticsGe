@@ -9,3 +9,4 @@ validation:
   email_taken: 'E-Mail is busy'
   empty_recaptcha: 'Check that you are not a robot'
   invalid_recaptcha: 'Invalid Recaptcha'
+  wrong_old_password: 'Wrong Old Password'

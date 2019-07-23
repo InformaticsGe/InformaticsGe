@@ -94,6 +94,7 @@
                             <li class="{{ current_route == 'user_profile' and app.user.username == app.request.get('username') ? 'active' : '' }}">
                                 <a href="{{ path('user_profile', { 'username' : app.user.username }) }}">{{ 'my_profile'|trans }}</a>
                             </li>
+                            <li class="{{ current_route == 'edit_profile' ? 'active' : '' }}"><a href="{{ path('edit_profile') }}">{{ 'edit_profile'|trans }}</a></li>
                             <li><a href="{{ path('app_logout') }}" style="color: red;">{{ 'logout'|trans }}</a></li>
                         </ul>
                     </li>

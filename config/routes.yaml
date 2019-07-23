@@ -112,3 +112,11 @@ user_profile:
     _locale: ka
   requirements:
     _locale:  ka|en
+
+edit_profile:
+  path: /{_locale}/edit-profile
+  controller: App\Controller\UserController::edit
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en

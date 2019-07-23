@@ -9,3 +9,4 @@ validation:
   email_taken: 'ელ.ფოსტა დაკავებულია'
   empty_recaptcha: 'მონიშნეთ, რომ არ ხართ რობოტი'
   invalid_recaptcha: 'Invalid Recaptcha'
+  wrong_old_password: 'ძველი პაროლი არასწორია'

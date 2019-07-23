@@ -1,0 +1,193 @@
+{#
+/**
+  * @file
+  * Profile edit page.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_path: Current URL (Path).
+  * - current_locale: Current language code.
+  * - user: Current user object.
+  */
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'edit_profile'|trans }}{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        let userAvatars = $('img.user-avatars');
+        let currentAvatarSrc = $('#user-avatar').attr('src');
+        let curAvatarSplitted  = currentAvatarSrc.split('/');
+
+        let currentAvatar = $('#' + curAvatarSplitted[3].split('.')[0]);
+        currentAvatar.addClass("selected-avatar");
+
+        let newImageSrc = currentAvatarSrc;
+
+        userAvatars.click(function () {
+            let curAvatar = $(this);
+            newImageSrc = curAvatar.attr('src');
+
+            userAvatars.removeClass('selected-avatar');
+            curAvatar.addClass('selected-avatar');
+        });
+
+        $('#select-user-avatar').click(function () {
+            $('#user-avatar').attr('src', newImageSrc);
+            $('#user_edit_form_avatar').val(newImageSrc.split('/')[3]);
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <br/><br/><br/>
+
+    {# User Sidebar #}
+    <div class="col-sm-3">
+        {% include 'layouts/user-sidebar.html.twig' %}
+    </div>
+    {# End User Sidebar #}
+
+    {# Edit Content #}
+    <div class="col-sm-9">
+        <div class="well">
+
+            <h3>{{ 'fill_personal_info'|trans }}</h3>
+            {{ form_start(editForm) }}
+
+            <div class="form-group">
+                <label for="user-avatar">{{ 'avatar'|trans }}</label> <br/>
+                <a href="#" data-toggle="modal" data-target="#ModalChangeAvatar">
+                    <img src="{{ asset('images/avatars/' ~ user.avatar) }}" class="img-thumbnail" id="user-avatar"
+                         width="200" alt="{{ user.username }}'s Avatar">
+                </a>
+                <p>{{ 'click_for_change_avatar'|trans }}</p>
+            </div>
+            <div class="form-group {{ form_errors(editForm.firstName) ? 'has-error' : '' }}">
+                {{ form_label(editForm.firstName) }}
+                {{ form_widget(editForm.firstName) }}
+
+                {% if form_errors(editForm.firstName) %}
+                    <div class="invalid-feedback">
+                        {{ form_errors(editForm.firstName) }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group {{ form_errors(editForm.lastName) ? 'has-error' : '' }}">
+                {{ form_label(editForm.lastName) }}
+                {{ form_widget(editForm.lastName) }}
+
+                {% if form_errors(editForm.lastName) %}
+                    <div class="invalid-feedback">
+                        {{ form_errors(editForm.lastName) }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.university) }}
+                {{ form_widget(editForm.university) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.city) }}
+                {{ form_widget(editForm.city) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.favoriteLanguage) }}
+                {{ form_widget(editForm.favoriteLanguage) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.about) }}
+                {{ form_widget(editForm.about) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.interests) }}
+                {{ form_widget(editForm.interests) }}
+                <p>{{ 'interests_addition'|trans }}</p>
+            </div>
+
+            <hr/>
+            <h4>{{ 'change_password'|trans }}</h4>
+            <p>{{ 'change_password_addition'|trans }}</p>
+
+            <div class="form-group {{ form_errors(editForm.oldPassword) ? 'has-error' : '' }}">
+                {{ form_label(editForm.oldPassword) }}
+                {{ form_widget(editForm.oldPassword) }}
+
+                {% if form_errors(editForm.oldPassword) %}
+                    <div class="invalid-feedback">
+                        {{ form_errors(editForm.oldPassword) }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group has-feedback {{ form_errors(editForm.plainPassword.first) ? 'has-error' : '' }}">
+                {{ form_label(editForm.plainPassword.first) }}
+                {{ form_widget(editForm.plainPassword.first) }}
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+                {% if form_errors(editForm.plainPassword.first) %}
+                    <div class="invalid-feedback">
+                        {{ form_errors(editForm.plainPassword.first) }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group has-feedback {{ form_errors(editForm.plainPassword.second) ? 'has-error' : '' }}">
+                {{ form_label(editForm.plainPassword.second) }}
+                {{ form_widget(editForm.plainPassword.second) }}
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+                {% if form_errors(editForm.plainPassword.second) %}
+                    <div class="invalid-feedback">
+                        {{ form_errors(editForm.plainPassword.second) }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-success">{{ 'save_changes'|trans }}</button>
+            </div>
+
+            {{ form_end(editForm) }}
+
+            {# Select Avatar Modal #}
+            <div class="modal fade" id="ModalChangeAvatar" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center form-title">{{ 'select_avatar'|trans }}</h4>
+                        </div>
+                        <div class="modal-body padtrbl">
+                            <div class="login-box-body">
+                                <center>
+                                    <img src="{{ asset('images/avatars/avatar1.png') }}" id="avatar1"
+                                         class="img-circle user-avatars" height="100" alt="Avatar 1">
+                                    <img src="{{ asset('images/avatars/avatar4.png') }}" id="avatar4"
+                                         class="img-circle user-avatars" height="100" alt="Avatar 4">
+                                    <img src="{{ asset('images/avatars/avatar2.png') }}" id="avatar2"
+                                         class="img-circle user-avatars" height="100" alt="Avatar 2">
+                                    <img src="{{ asset('images/avatars/avatar5.png') }}" id="avatar5"
+                                         class="img-circle user-avatars" height="100" alt="Avatar 5">
+                                    <img src="{{ asset('images/avatars/avatar3.png') }}" id="avatar3"
+                                         class="img-circle user-avatars" height="100" alt="Avatar 3">
+                                    <img src="{{ asset('images/avatars/avatar6.png') }}" id="avatar6"
+                                         class="img-circle user-avatars" height="100" alt="Avatar 6">
+                                </center>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger"
+                                    data-dismiss="modal">{{ 'reset.general'|trans }}</button>
+                            <button type="button" id="select-user-avatar" class="btn btn-success"
+                                    data-dismiss="modal">{{ 'select'|trans }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# End Select Avatar Modal #}
+        </div>
+    </div>
+    {# End Edit Content #}
+{% endblock %}

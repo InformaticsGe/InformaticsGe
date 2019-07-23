@@ -19,60 +19,7 @@
 
     {# User Sidebar #}
     <div class="col-sm-3">
-        <div class="well text-center">
-            <div class="avatar">
-                <div>
-                    <figure>
-                        <img src="{{ asset('images/avatars/' ~ user.avatar) }}" class="img-circle" width="50%" alt="{{ user.username }}'s Avatar">
-                    </figure>
-                </div>
-            </div>
-
-            <h4>{{ user.username }}</h4>
-
-            <div class="alert alert-danger">
-                <p><strong>{{ 'about_me'|trans }}</strong></p>
-                <p>{{ user.about }}</p>
-            </div>
-
-            {% if user.interests is not empty %}
-                {% set interestStyles = [
-                    'default',
-                    'primary',
-                    'success',
-                    'info',
-                    'warning',
-                    'danger',
-                ] %}
-                <p>{{ 'interests'|trans }}</p>
-                <p>
-                    {% for interest in user.interests|split(',') %}
-                        <span class="label label-{{ random(interestStyles) }}">{{ interest|trim }}</span>
-                    {% endfor %}
-                </p>
-            {% endif %}
-
-            <!-- FB Buttons -->
-            <div class="col-sm-12">
-                <div class="col-sm-12">
-                    <div class="fb-save"
-                         data-uri="{{ current_path }}"
-                         data-size="large"></div>
-                </div>
-
-                <div class="col-sm-12">
-                    <div class="fb-like"
-                         data-href="{{ current_path }}"
-                         data-layout="button_count"
-                         data-action="like"
-                         data-size="small"
-                         data-show-faces="true"
-                         data-share="true"></div>
-                </div>
-            </div>
-            <br/><br/>
-            <!--/ FB Buttons -->
-        </div>
+        {% include 'layouts/user-sidebar.html.twig' %}
     </div>
     {# End User Sidebar #}
 
@@ -81,7 +28,13 @@
         <div class="well">
             <div class="profile">
                 <div class="header-section text-center">
-                    <h3>{{ user.firstName ~ ' ' ~ user.lastName }}</h3>
+                    <h3>
+                        {{ user.firstName ~ ' ' ~ user.lastName }}
+
+                        {% if app.user.username == user.username %}
+                            <a href="{{ path('edit_profile') }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                        {% endif %}
+                    </h3>
                     <hr class="bottom-line">
                 </div>
 
