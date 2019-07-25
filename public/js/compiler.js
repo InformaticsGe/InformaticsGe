@@ -107,12 +107,12 @@ $('input#compiler-form-submit').click(function () {
         success: function (response) {
             if (response.success) {
                 let result;
-                if ('' === response.error) {
+                if (response.isError) {
+                    result = 'Compilation Error:\n\n' + response.error;
+                } else {
                     result = 'Time: ' + response.time + '\n' +
                         'Memory: ' + response.memory + '\n\n' +
                         'Output:\n\n' + response.output;
-                } else {
-                    result = 'Compilation Error:\n\n' + response.error;
                 }
 
                 outputEditor.setValue(result);

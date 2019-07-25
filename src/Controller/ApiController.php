@@ -39,7 +39,8 @@ class ApiController extends AbstractController
 
         // Map compiler language to compiler class.
         $compilerClassesMapping = [
-            'cpp' => 'CPPCompiler'
+            'cpp' => 'CPPCompiler',
+            'c_sharp' => 'CSharpCompiler',
         ];
 
         // Check if given language is valid.
@@ -63,6 +64,7 @@ class ApiController extends AbstractController
 
         return new JsonResponse([
             'success' => true,
+            'isError' => $compilerObj->isError(),
             'error' => $compilerObj->getError(),
             'output' => $compilerObj->getExecutionOutput(),
             'time' => $compilerObj->getExecutionTime(),

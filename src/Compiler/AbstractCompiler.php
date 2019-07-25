@@ -21,6 +21,7 @@ class AbstractCompiler
     protected $codeFilename;
     protected $inputFilename = 'input.txt';
     protected $errorFilename = 'error.txt';
+    protected $isError = false;
     protected $errorOutput;
     protected $executionOutput;
     protected $executionTime;
@@ -68,6 +69,10 @@ class AbstractCompiler
             $this->directory . '/' . $this->errorFilename
         );
 
+        if ('' !== $this->errorOutput) {
+            $this->isError = true;
+        }
+
         $this->compiled = true;
 
         return $this;
@@ -92,7 +97,7 @@ class AbstractCompiler
         $executionStartTime = microtime(true);
 
         // Execute command.
-        $this->executionOutput = shell_exec('cd ' . $this->directory . ' && ' . $executionCommand);
+        $this->executionOutput = shell_exec('cd ' . $this->directory . ' && ' . $executionCommand) ?: '';
 
         //Calculate executable time
         $executionEndTime = microtime(true);
@@ -102,6 +107,16 @@ class AbstractCompiler
         $this->executionMemory = round(memory_get_usage() / 1048576, 2);
 
         return $this;
+    }
+
+    /**
+     * Return true if there is compilation error.
+     *
+     * @return bool
+     */
+    public function isError()
+    {
+        return $this->isError;
     }
 
     /**
