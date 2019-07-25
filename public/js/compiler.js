@@ -106,11 +106,16 @@ $('input#compiler-form-submit').click(function () {
         cache: false,
         success: function (response) {
             if (response.success) {
-                outputEditor.setValue(
-                    'language: ' + response.language + ', \n\n' +
-                    'code: \n\n' + response.code + '\n\n' +
-                    'inputData: \n\n' + response.inputData
-                );
+                let result;
+                if ('' === response.error) {
+                    result = 'Time: ' + response.time + '\n' +
+                        'Memory: ' + response.memory + '\n\n' +
+                        'Output:\n\n' + response.output;
+                } else {
+                    result = 'Compilation Error:\n\n' + response.error;
+                }
+
+                outputEditor.setValue(result);
 
                 outputEditor.clearSelection();
                 outputEditor.focus();
