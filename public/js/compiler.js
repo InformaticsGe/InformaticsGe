@@ -80,5 +80,60 @@ languageSelector.change(function () {
 });
 
 $('input#compiler-form-submit').click(function () {
-   alert('Run Compiler');
+    let submitButton = $(this);
+    let loader = $('div#compiler-loader');
+    let form = $('form[name=compiler-form]');
+    let formAction = form.attr('action');
+    let formMethod = form.attr('method');
+
+    let _token = $('input[name=_token]').val();
+    let language = languageSelector.val();
+    let code = codeEditor.getValue();
+    let inputData = inputEditor.getValue();
+
+    // Disable button.
+    submitButton.attr('disabled', true);
+
+    // Show loader
+    loader.attr('hidden', false);
+
+    $.ajax({
+        url: formAction,
+        type: formMethod,
+        data: {
+            _token, language, code, inputData
+        },
+        cache: false,
+        success: function (response) {
+            if (response.success) {
+                outputEditor.setValue(
+                    'language: ' + response.language + ', \n\n' +
+                    'code: \n\n' + response.code + '\n\n' +
+                    'inputData: \n\n' + response.inputData
+                );
+
+                outputEditor.clearSelection();
+                outputEditor.focus();
+            } else {
+                let errorCode = response.message;
+
+                toastr.error(compilerTranslations[errorCode], compilerTranslations['error'], {"positionClass": "toast-top-center"});
+            }
+
+            // Enable button.
+            submitButton.attr('disabled', false);
+
+            // Hide loader
+            loader.attr('hidden', true);
+        },
+        error: function (response) {
+            // toastr.error('I do not think that word means what you think it means.', 'Inconceivable!')
+
+            // Enable button.
+            submitButton.attr('disabled', false);
+
+            // Hide loader
+            loader.attr('hidden', true);
+        }
+    });
 });

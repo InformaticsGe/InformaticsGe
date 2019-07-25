@@ -13,11 +13,26 @@
 
 {% block title %}{{ 'compiler'|trans }}{% endblock %}
 
+{% block styles %}
+    {{ parent() }}
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript"
             charset="utf-8"></script>
+
+    <script>
+        const compilerTranslations = {
+            'error': '{{ 'error'|trans }}',
+            'invalid-token': '{{ 'invalid_token'|trans }}'
+        }
+    </script>
+
     <script src="{{ asset('js/compiler.js') }}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
 
@@ -41,7 +56,8 @@
                     <br/>
                 </div>
             </div>
-            <form name="compiler-form" action="" method="post">
+            <form name="compiler-form" action="{{ path('compiler_compile') }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token('compiler-compile-code') }}"/>
                 <div class="col-md-12">
                     <div class="col-md-6">
                         <div class="form-group">
