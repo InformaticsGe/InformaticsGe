@@ -16,4 +16,14 @@ class DefaultController extends AbstractController
     {
         return $this->render('default/about.html.twig');
     }
+
+    /**
+     * Compiler page action.
+     *
+     * @return Response
+     */
+    public function compiler()
+    {
+        return $this->render('default/compiler.html.twig');
+    }
 }
