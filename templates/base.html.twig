@@ -78,6 +78,8 @@
                             href="{{ url('index') }}">{{ 'homepage'|trans }}</a></li>
                 <li class="{{ current_route in ['material_index', 'material_problems', 'material_single_problem', 'material_algorithms'] ? 'active' : '' }}">
                     <a href="{{ url('material_index') }}">{{ 'materials'|trans }}</a></li>
+                <li class="{{ current_route == 'compiler' ? 'active' : '' }}">
+                    <a href="{{ url('compiler') }}">{{ 'compiler'|trans }}</a></li>
                 <li class="{{ current_route == 'about' ? 'active' : '' }}"><a
                             href="{{ url('about') }}">{{ 'we'|trans }}</a></li>
 

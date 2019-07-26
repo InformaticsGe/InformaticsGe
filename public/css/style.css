@@ -906,10 +906,11 @@ a.socialIcon:hover, .socialHoverClass {
     height: 1em;
     list-style: outside none none;
     margin: 0 auto;
-    position: relative;
-    top: 35%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
     width: 1em;
-    z-index: 2147483647;
+    z-index: 999;
 }
 .bokeh li {
     border-radius: 50%;

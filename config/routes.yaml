@@ -70,6 +70,20 @@ password_reset:
   requirements:
     _locale:  ka|en
 
+# compiler
+compiler:
+  path: /{_locale}/compiler
+  controller: App\Controller\DefaultController::compiler
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
+
+compiler_compile:
+  path: /api/compiler/compile
+  controller: App\Controller\ApiController::compilerCompileCode
+  methods: post
+
 # Material
 material_index:
   path: /{_locale}/material
