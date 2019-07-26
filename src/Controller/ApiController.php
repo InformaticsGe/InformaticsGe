@@ -15,8 +15,6 @@ class ApiController extends AbstractController
      * @param Request $request
      *
      * @return JsonResponse
-     *
-     * @throws \Exception
      */
     public function compilerCompileCode(Request $request)
     {
@@ -55,6 +53,7 @@ class ApiController extends AbstractController
             ],
             'php' => 'PHPCompiler',
             'node_js' => 'NodeJSCompiler',
+            'free_pascal' => 'FreePascalCompiler',
         ];
 
         // Check if given language is valid.

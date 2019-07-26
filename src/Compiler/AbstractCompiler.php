@@ -82,13 +82,15 @@ class AbstractCompiler
      * Execute binary file or run script.
      *
      * @return AbstractCompiler
-     *
-     * @throws \Exception
      */
     public function execute(): self
     {
         if (!$this->compiled) {
-            throw new \Exception('Code isn\'t compiled.');
+            $this->executionOutput = '';
+            $this->executionTime = 0.00;
+            $this->executionMemory = 0.00;
+
+            return $this;
         }
 
         $executionCommand = '' == $this->inputData ? $this->executeCommand :
