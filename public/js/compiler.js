@@ -29,8 +29,8 @@ const compilerLanguages = {
         'mode': 'php',
         'code': '<?php\n\techo "Hello, World!";'
     },
-    'js': {
-        'title': 'JavaScript',
+    'node_js': {
+        'title': 'Node.js',
         'mode': 'javascript',
         'code': 'console.log(\'Hello, World!\');'
     },

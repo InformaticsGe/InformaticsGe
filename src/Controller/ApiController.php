@@ -54,6 +54,7 @@ class ApiController extends AbstractController
                 ]
             ],
             'php' => 'PHPCompiler',
+            'node_js' => 'NodeJSCompiler',
         ];
 
         // Check if given language is valid.
