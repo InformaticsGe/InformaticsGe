@@ -51,6 +51,7 @@ class ApiController extends AbstractController
                     'version' => 3
                 ]
             ],
+            'java' => 'JavaCompiler',
             'php' => 'PHPCompiler',
             'node_js' => 'NodeJSCompiler',
             'free_pascal' => 'FreePascalCompiler',
