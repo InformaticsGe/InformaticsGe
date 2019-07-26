@@ -53,6 +53,7 @@ class ApiController extends AbstractController
                     'version' => 3
                 ]
             ],
+            'php' => 'PHPCompiler',
         ];
 
         // Check if given language is valid.
