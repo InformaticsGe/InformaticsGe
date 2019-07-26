@@ -3,7 +3,7 @@
 namespace App\Compiler;
 
 
-class FreePascalCompiler extends AbstractCompiler
+final class FreePascalCompiler extends AbstractCompiler
 {
     /**
      * FreePascalCompiler constructor.

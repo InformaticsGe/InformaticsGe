@@ -3,7 +3,7 @@
 namespace App\Compiler;
 
 
-class NodeJSCompiler extends AbstractCompiler
+final class NodeJSCompiler extends AbstractCompiler
 {
     /**
      * NodeJSCompiler constructor.

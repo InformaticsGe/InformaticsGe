@@ -3,7 +3,7 @@
 namespace App\Compiler;
 
 
-class PythonCompiler extends AbstractCompiler
+final class PythonCompiler extends AbstractCompiler
 {
     /**
      * PythonCompiler constructor.

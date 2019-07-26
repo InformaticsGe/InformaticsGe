@@ -3,7 +3,7 @@
 namespace App\Compiler;
 
 
-class CPPCompiler extends AbstractCompiler
+final class CPPCompiler extends AbstractCompiler
 {
     /**
      * CPPCompiler constructor.

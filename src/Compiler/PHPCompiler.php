@@ -3,7 +3,7 @@
 namespace App\Compiler;
 
 
-class PHPCompiler extends AbstractCompiler
+final class PHPCompiler extends AbstractCompiler
 {
     /**
      * PHPCompiler constructor.

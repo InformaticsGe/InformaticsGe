@@ -3,7 +3,7 @@
 namespace App\Compiler;
 
 
-class JavaCompiler extends AbstractCompiler
+final class JavaCompiler extends AbstractCompiler
 {
     /**
      * JavaCompiler constructor.

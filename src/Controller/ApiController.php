@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Compiler\AbstractCompiler;
+use App\Service\CompilerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,10 +13,11 @@ class ApiController extends AbstractController
      * Compile code on /compiler page.
      *
      * @param Request $request
+     * @param CompilerService $compilerService
      *
      * @return JsonResponse
      */
-    public function compilerCompileCode(Request $request)
+    public function compilerCompileCode(Request $request, CompilerService $compilerService)
     {
         // Get data from request.
 
@@ -35,65 +36,8 @@ class ApiController extends AbstractController
             ]);
         }
 
-        // Map compiler language to compiler class.
-        $compilerClassesMapping = [
-            'cpp' => 'CPPCompiler',
-            'c_sharp' => 'CSharpCompiler',
-            'python2' => [
-                'class' => 'PythonCompiler',
-                'additionalData' => [
-                    'version' => 2
-                ]
-            ],
-            'python3' => [
-                'class' => 'PythonCompiler',
-                'additionalData' => [
-                    'version' => 3
-                ]
-            ],
-            'java' => 'JavaCompiler',
-            'php' => 'PHPCompiler',
-            'node_js' => 'NodeJSCompiler',
-            'free_pascal' => 'FreePascalCompiler',
-        ];
+        $compilationData = $compilerService->runCompiler($language, $code, $inputData);
 
-        // Check if given language is valid.
-        if (!isset($compilerClassesMapping[$language])) {
-            return new JsonResponse([
-                'success' => false,
-                'message' => 'invalid-compiler'
-            ]);
-        }
-
-        // Prepare compiler class name.
-
-        $compilerClass = null;
-        /** @var AbstractCompiler $compilerObj */
-        $compilerObj = null;
-
-        if (is_array($compilerClassesMapping[$language])) {
-            $compilerClass = '\\App\\Compiler\\' . $compilerClassesMapping[$language]['class'];
-            $compilerObj = new $compilerClass(
-                $code, $inputData, 10,
-                $compilerClassesMapping[$language]['additionalData']
-            );
-        } else {
-            $compilerClass = '\\App\\Compiler\\' . $compilerClassesMapping[$language];
-            $compilerObj = new $compilerClass($code, $inputData, 10);
-        }
-
-        // Compile and execute code.
-        $compilerObj
-            ->compile()
-            ->execute();
-
-        return new JsonResponse([
-            'success' => true,
-            'isError' => $compilerObj->isError(),
-            'error' => $compilerObj->getError(),
-            'output' => $compilerObj->getExecutionOutput(),
-            'time' => $compilerObj->getExecutionTime(),
-            'memory' => $compilerObj->getExecutionMemory()
-        ]);
+        return new JsonResponse($compilationData);
     }
 }

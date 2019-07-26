@@ -3,7 +3,7 @@
 namespace App\Compiler;
 
 
-class CSharpCompiler extends AbstractCompiler
+final class CSharpCompiler extends AbstractCompiler
 {
     /**
      * CSharpCompiler constructor.
