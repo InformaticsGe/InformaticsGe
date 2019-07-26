@@ -41,6 +41,18 @@ class ApiController extends AbstractController
         $compilerClassesMapping = [
             'cpp' => 'CPPCompiler',
             'c_sharp' => 'CSharpCompiler',
+            'python2' => [
+                'class' => 'PythonCompiler',
+                'additionalData' => [
+                    'version' => 2
+                ]
+            ],
+            'python3' => [
+                'class' => 'PythonCompiler',
+                'additionalData' => [
+                    'version' => 3
+                ]
+            ],
         ];
 
         // Check if given language is valid.
@@ -52,10 +64,21 @@ class ApiController extends AbstractController
         }
 
         // Prepare compiler class name.
-        $compilerClass = '\\App\\Compiler\\' . $compilerClassesMapping[$language];
 
+        $compilerClass = null;
         /** @var AbstractCompiler $compilerObj */
-        $compilerObj = new $compilerClass($code, $inputData, 10);
+        $compilerObj = null;
+
+        if (is_array($compilerClassesMapping[$language])) {
+            $compilerClass = '\\App\\Compiler\\' . $compilerClassesMapping[$language]['class'];
+            $compilerObj = new $compilerClass(
+                $code, $inputData, 10,
+                $compilerClassesMapping[$language]['additionalData']
+            );
+        } else {
+            $compilerClass = '\\App\\Compiler\\' . $compilerClassesMapping[$language];
+            $compilerObj = new $compilerClass($code, $inputData, 10);
+        }
 
         // Compile and execute code.
         $compilerObj
