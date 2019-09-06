@@ -41,22 +41,22 @@ class Problem
     /**
      * @ORM\Column(type="smallint")
      */
-    private $timeLimit;
+    private $timeLimit = 1;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $memoryLimit;
+    private $memoryLimit = 64;
 
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $inputType;
+    private $inputType = 'stdin';
 
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $outputType;
+    private $outputType = 'stdout';
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -74,12 +74,12 @@ class Problem
     private $visible = true;
 
     /**
-     * @ORM\Column(type="simple_array", nullable=true)
+     * @ORM\Column(type="array", nullable=true)
      */
     private $sampleTests = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProblemTest", mappedBy="problem", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\ProblemTest", mappedBy="problem", orphanRemoval=true, cascade={"persist"})
      */
     private $tests;
 
