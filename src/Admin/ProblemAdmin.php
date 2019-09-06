@@ -21,6 +21,11 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 final class ProblemAdmin extends AbstractAdmin
 {
 
+    protected $datagridValues = [
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'id',
+    ];
+
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $datagridMapper
@@ -46,16 +51,8 @@ final class ProblemAdmin extends AbstractAdmin
             ->add('id')
             ->add('title')
             ->add('tags')
-            ->add('text')
-            ->add('notes')
-            ->add('timeLimit')
-            ->add('memoryLimit')
-            ->add('inputType')
-            ->add('outputType')
             ->add('sourceTitle')
-            ->add('sourceUrl')
             ->add('visible')
-            ->add('sampleTests')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -162,8 +159,6 @@ final class ProblemAdmin extends AbstractAdmin
             ->add('outputType')
             ->add('sourceTitle')
             ->add('sourceUrl')
-            ->add('visible')
-            ->add('sampleTests')
-            ;
+            ->add('visible');
     }
 }
