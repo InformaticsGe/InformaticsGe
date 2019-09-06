@@ -29,20 +29,42 @@ final class ProblemAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $datagridMapper
-            ->add('id')
-            ->add('title')
-            ->add('tags')
-            ->add('text')
-            ->add('notes')
-            ->add('timeLimit')
-            ->add('memoryLimit')
-            ->add('inputType')
-            ->add('outputType')
-            ->add('sourceTitle')
-            ->add('sourceUrl')
-            ->add('visible')
-            ->add('sampleTests')
-            ;
+            ->add('id', null, [
+                'label' => 'admin.label.id',
+            ])
+            ->add('title', null, [
+                'label' => 'admin.label.title',
+            ])
+            ->add('tags', null, [
+                'label' => 'admin.label.tags',
+            ])
+            ->add('text', null, [
+                'label' => 'admin.label.text',
+            ])
+            ->add('notes', null, [
+                'label' => 'admin.label.notes',
+            ])
+            ->add('timeLimit', null, [
+                'label' => 'admin.label.time_limit',
+            ])
+            ->add('memoryLimit', null, [
+                'label' => 'admin.label.memory_limit',
+            ])
+            ->add('inputType', null, [
+                'label' => 'admin.label.input_type',
+            ])
+            ->add('outputType', null, [
+                'label' => 'admin.label.output_type',
+            ])
+            ->add('sourceTitle', null, [
+                'label' => 'admin.label.source_title',
+            ])
+            ->add('sourceUrl', null, [
+                'label' => 'admin.label.source_url',
+            ])
+            ->add('visible', null, [
+                'label' => 'admin.label.visible',
+            ]);
     }
 
     protected function configureListFields(ListMapper $listMapper): void
