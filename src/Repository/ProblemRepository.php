@@ -19,6 +19,22 @@ class ProblemRepository extends ServiceEntityRepository
         parent::__construct($registry, Problem::class);
     }
 
+    /**
+     * Get only visible problems for listing page.
+     *
+     * @return Problem[]
+     */
+    public function findVisibleForListing()
+    {
+        return $this->createQueryBuilder('p')
+            ->select(['p.id', 'p.title', 'p.tags', 'p.sourceTitle', 'p.sourceUrl'])
+            ->andWhere('p.visible = :visible')
+            ->setParameter('visible', true)
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Problem[] Returns an array of Problem objects
     //  */

@@ -134,3 +134,12 @@ edit_profile:
     _locale: ka
   requirements:
     _locale:  ka|en
+
+# Problem
+problem_list:
+  path: /{_locale}/problems
+  controller: App\Controller\ProblemController::list
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
