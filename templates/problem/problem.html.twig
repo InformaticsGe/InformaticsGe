@@ -14,6 +14,12 @@
 
 {% block title %}{{ problem.title }}{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/problem.js') }}" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+
 {% block body %}
     <div class="header-section text-center">
         <h2>{{ problem.title }}</h2>
@@ -59,12 +65,12 @@
             {% for test in problem.sampleTests %}
                 <div class="col-sm-12 well">
                     <div class="col-sm-6">
-                      <pre>{{ 'input_data'|trans }}<br/><span id="Test1Input">{{ test.input }}</span>
+                      <pre>{{ 'input_data'|trans }}<br/><span>{{ test.input }}</span>
                       <span class="copy-test">{{ 'copy'|trans }}</span></pre>
                     </div>
 
                     <div class="col-sm-6">
-                      <pre>{{ 'output_data'|trans }}<br/><span id="Test1Output">{{ test.output }}</span>
+                      <pre>{{ 'output_data'|trans }}<br/><span>{{ test.output }}</span>
                       <span class="copy-test">{{ 'copy'|trans }}</span></pre>
                     </div>
                 </div>
