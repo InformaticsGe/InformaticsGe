@@ -66,9 +66,11 @@
         <tbody>
         {% for problem in problems %}
             <tr>
-                <td>{{ problem.id }}</td>
                 <td>
-                    <a href="#">{{ problem.title }}</a>
+                    <a href="{{ path('single_problem', { id: problem.id }) }}">{{ problem.id }}</a>
+                </td>
+                <td>
+                    <a href="{{ path('single_problem', { id: problem.id }) }}">{{ problem.title }}</a>
 
                     {% if problem.tags is not empty %}
                         <span class="row-tags">

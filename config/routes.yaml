@@ -143,3 +143,12 @@ problem_list:
     _locale: ka
   requirements:
     _locale:  ka|en
+
+single_problem:
+  path: /{_locale}/problem/{id}
+  controller: App\Controller\ProblemController::single
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
+    id: \d+

@@ -1,0 +1,82 @@
+{#
+/**
+  * @file
+  * Template for Single Problem page.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_path: Current URL (Path).
+  * - current_locale: Current language code.
+  * - problem: Problem entity.
+  */
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ problem.title }}{% endblock %}
+
+{% block body %}
+    <div class="header-section text-center">
+        <h2>{{ problem.title }}</h2>
+        <p>{{ 'problem_time_limit'|trans({'%limit%': problem.timeLimit })|raw }}</p>
+        <p>{{ 'problem_memory_limit'|trans({'%limit%': problem.memoryLimit })|raw }}</p>
+        <p>{{ 'problem_input_data'|trans({'%type%': problem.inputType })|raw }}</p>
+        <p>{{ 'problem_output_data'|trans({'%type%': problem.outputType })|raw }}</p>
+        <hr class="bottom-line">
+    </div>
+
+    <div class="col-sm-12">
+        {% if not problem.visible %}
+            <div class="alert alert-info">
+                {{ 'problem_is_not_visible_message'|trans }}
+            </div>
+        {% endif %}
+        {{ problem.text|raw }}
+    </div>
+
+    <div class="col-sm-12">
+        <div class="col-sm-12">
+            <br />
+            <div class="fb-save"
+                 data-uri="{{ current_path }}"
+                 data-size="large"></div>
+            <br /><br />
+        </div>
+
+        <div class="col-sm-12">
+            <div class="fb-like"
+                 data-href="{{ current_path }}"
+                 data-layout="standard"
+                 data-action="like"
+                 data-size="small"
+                 data-show-faces="true"
+                 data-share="true"></div>
+        </div>
+    </div>
+
+    {% if problem.sampleTests is not empty %}
+        <div class="col-sm-12">
+            <h3>{{ 'examples'|trans }}</h3>
+            {% for test in problem.sampleTests %}
+                <div class="col-sm-12 well">
+                    <div class="col-sm-6">
+                      <pre>{{ 'input_data'|trans }}<br/><span id="Test1Input">{{ test.input }}</span>
+                      <span class="copy-test">{{ 'copy'|trans }}</span></pre>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <pre>{{ 'output_data'|trans }}<br/><span id="Test1Output">{{ test.output }}</span>
+                      <span class="copy-test">{{ 'copy'|trans }}</span></pre>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if problem.notes is not null
+        or problem.notes is not empty %}
+        <div class="col-sm-12">
+            <h3>{{ 'notes'|trans }}</h3>
+            {{ problem.notes|raw }}
+        </div>
+    {% endif %}
+{% endblock %}
