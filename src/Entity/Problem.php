@@ -83,9 +83,15 @@ class Problem
      */
     private $tests;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProblemSubmission", mappedBy="problem", orphanRemoval=true)
+     */
+    private $submissions;
+
     public function __construct()
     {
         $this->tests = new ArrayCollection();
+        $this->submissions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -262,6 +268,37 @@ class Problem
             // set the owning side to null (unless already changed)
             if ($test->getProblem() === $this) {
                 $test->setProblem(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProblemSubmission[]
+     */
+    public function getSubmissions(): Collection
+    {
+        return $this->submissions;
+    }
+
+    public function addSubmission(ProblemSubmission $submission): self
+    {
+        if (!$this->submissions->contains($submission)) {
+            $this->submissions[] = $submission;
+            $submission->setProblem($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubmission(ProblemSubmission $submission): self
+    {
+        if ($this->submissions->contains($submission)) {
+            $this->submissions->removeElement($submission);
+            // set the owning side to null (unless already changed)
+            if ($submission->getProblem() === $this) {
+                $submission->setProblem(null);
             }
         }
 

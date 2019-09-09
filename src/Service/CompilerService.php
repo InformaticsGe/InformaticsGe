@@ -7,16 +7,16 @@ use App\Compiler\AbstractCompiler;
 
 class CompilerService
 {
+
     /**
-     * Compile code for given language.
+     * Create new compiler object for given language.
      *
      * @param string $language
      * @param string $code
-     * @param string $inputData
      *
-     * @return array
+     * @return AbstractCompiler|array
      */
-    public function runCompiler(string $language, string $code, string $inputData): array
+    public function getCompiler(string $language, string $code)
     {
         // Map compiler language to compiler class.
         $compilerClassesMapping = [
@@ -57,26 +57,14 @@ class CompilerService
         if (is_array($compilerClassesMapping[$language])) {
             $compilerClass = '\\App\\Compiler\\' . $compilerClassesMapping[$language]['class'];
             $compilerObj = new $compilerClass(
-                $code, $inputData, 10,
+                $code, 10,
                 $compilerClassesMapping[$language]['additionalData']
             );
         } else {
             $compilerClass = '\\App\\Compiler\\' . $compilerClassesMapping[$language];
-            $compilerObj = new $compilerClass($code, $inputData, 10);
+            $compilerObj = new $compilerClass($code, 10);
         }
 
-        // Compile and execute code.
-        $compilerObj
-            ->compile()
-            ->execute();
-
-        return [
-            'success' => true,
-            'isError' => $compilerObj->isError(),
-            'error' => $compilerObj->getError(),
-            'output' => $compilerObj->getExecutionOutput(),
-            'time' => $compilerObj->getExecutionTime(),
-            'memory' => $compilerObj->getExecutionMemory()
-        ];
+        return $compilerObj;
     }
 }

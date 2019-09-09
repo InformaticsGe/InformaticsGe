@@ -88,7 +88,7 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="#" title="{{ 'solve'|trans }}"><i class="fa fa-send"></i></a>
+                    <a href="{{ path('solve_problem', { id: problem.id }) }}" title="{{ 'solve'|trans }}"><i class="fa fa-send"></i></a>
                     <a href="#" title="{{ 'stare'|trans }}"><i class="fa fa-star"></i></a>
                 </td>
             </tr>

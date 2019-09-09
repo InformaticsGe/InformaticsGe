@@ -10,7 +10,7 @@
   * - problem: Problem entity.
   */
 #}
-{% extends 'base.html.twig' %}
+{% extends 'problem/layout.html.twig' %}
 
 {% block title %}{{ problem.title }}{% endblock %}
 
@@ -20,7 +20,7 @@
     <script src="{{ asset('js/problem.js') }}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
 
-{% block body %}
+{% block problem_body %}
     <div class="header-section text-center">
         <h2>{{ problem.title }}</h2>
         <p>{{ 'problem_time_limit'|trans({'%limit%': problem.timeLimit })|raw }}</p>

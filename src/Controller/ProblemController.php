@@ -66,4 +66,24 @@ class ProblemController extends AbstractController
             'problem' => $problem,
         ]);
     }
+
+    /**
+     * Submit problem solution.
+     *
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function solve($id)
+    {
+        $problem = $this->_repository
+            ->find($id);
+
+        if (null === $problem || !$problem->getVisible()) {
+            throw new NotFoundHttpException($this->_translator->trans('problem_not_found', ['%problem_id%' => $id]));
+        }
+
+        return $this->render('problem/solve.html.twig', [
+            'problem' => $problem,
+        ]);
+    }
 }

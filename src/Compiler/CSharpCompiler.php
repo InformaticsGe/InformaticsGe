@@ -9,14 +9,13 @@ final class CSharpCompiler extends AbstractCompiler
      * CSharpCompiler constructor.
      *
      * @param string $code
-     * @param string $inputData
      * @param $timeLimit
      */
-    public function __construct(string $code, string $inputData, $timeLimit)
+    public function __construct(string $code, $timeLimit)
     {
         $timeLimit *= 2;
 
-        parent::__construct($code, $inputData, $timeLimit);
+        parent::__construct($code, $timeLimit);
 
         $this->executable = 'main.exe';
         $this->codeFilename = 'main.cs';

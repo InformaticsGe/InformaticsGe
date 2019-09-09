@@ -152,3 +152,17 @@ single_problem:
   requirements:
     _locale:  ka|en
     id: \d+
+
+solve_problem:
+  path: /{_locale}/problem/{id}/solve
+  controller: App\Controller\ProblemController::solve
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
+    id: \d+
+
+submit_problem_solution:
+  path: /api/compiler/submit-solution/{id}
+  controller: App\Controller\ApiController::submitProblemSolution
+  methods: post
