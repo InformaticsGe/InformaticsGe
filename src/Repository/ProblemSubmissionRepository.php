@@ -19,6 +19,22 @@ class ProblemSubmissionRepository extends ServiceEntityRepository
         parent::__construct($registry, ProblemSubmission::class);
     }
 
+    /**
+     * Get last submissions.
+     * @param int $count
+     *
+     * @return ProblemSubmission[] Returns an array of ProblemSubmission objects
+     */
+    public function findLast($count = 1)
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult();
+    }
+
+
     // /**
     //  * @return ProblemSubmission[] Returns an array of ProblemSubmission objects
     //  */

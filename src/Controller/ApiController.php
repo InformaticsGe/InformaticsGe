@@ -82,6 +82,8 @@ class ApiController extends AbstractController
         UserRepository $userRepository,
         Security $security
     ) {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $request = $request->request;
         $_token = $request->get('_token');
 

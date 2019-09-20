@@ -304,4 +304,10 @@ class Problem
 
         return $this;
     }
+
+    public function getTestsCount()
+    {
+        return $this->tests
+            ->count();
+    }
 }

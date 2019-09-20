@@ -20,6 +20,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript"
             charset="utf-8"></script>
 
+    <script>
+        let statusPageUrl = '{{ path('solutions_status') }}';
+    </script>
     <script src="{{ asset('js/compiler-properties.js') }}" type="text/javascript" charset="utf-8"></script>
     <script src="{{ asset('js/problem.js') }}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}

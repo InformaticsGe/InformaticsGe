@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ProblemRepository;
+use App\Repository\ProblemSubmissionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -75,6 +76,8 @@ class ProblemController extends AbstractController
      */
     public function solve($id)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $problem = $this->_repository
             ->find($id);
 
@@ -84,6 +87,22 @@ class ProblemController extends AbstractController
 
         return $this->render('problem/solve.html.twig', [
             'problem' => $problem,
+        ]);
+    }
+
+    /**
+     * show last solutions page.
+     *
+     * @param ProblemSubmissionRepository $submissionRepository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function status(ProblemSubmissionRepository $submissionRepository)
+    {
+        $submissions = $submissionRepository->findLast(300);
+
+        return $this->render('problem/submissions.html.twig', [
+           'submissions' => $submissions,
         ]);
     }
 }

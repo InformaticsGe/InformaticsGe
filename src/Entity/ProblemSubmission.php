@@ -171,4 +171,14 @@ class ProblemSubmission
 
         return $this;
     }
+
+    public function getAcceptedTestsCount()
+    {
+        $accepted = array_filter($this->results->getValues(), function ($value, $key) {
+            /** @var ProblemSubmissionResult $value */
+            return 'AC' === $value->getVerdict();
+        }, ARRAY_FILTER_USE_BOTH);
+
+        return count($accepted);
+    }
 }

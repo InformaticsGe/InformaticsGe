@@ -166,3 +166,12 @@ submit_problem_solution:
   path: /api/compiler/submit-solution/{id}
   controller: App\Controller\ApiController::submitProblemSolution
   methods: post
+
+solutions_status:
+  path: /{_locale}/status
+  controller: App\Controller\ProblemController::status
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
+    id: \d+

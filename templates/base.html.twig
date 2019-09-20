@@ -82,7 +82,7 @@
                     <a href="{{ url('compiler') }}">{{ 'compiler'|trans }}</a></li>
                 <li class="dropdown">
                     <a href="#"
-                       class="dropdown-toggle{{ current_route in ['problem_list'] ? ' active-link' : '' }}"
+                       class="dropdown-toggle{{ current_route in ['problem_list', 'solutions_status'] ? ' active-link' : '' }}"
                        data-toggle="dropdown"
                        role="button"
                        aria-haspopup="true"
@@ -90,7 +90,7 @@
                         {{ 'archive'|trans }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">{{ 'status'|trans }}</a></li>
+                        <li{{ current_route == 'solutions_status' ? ' class="active"' : '' }}><a href="{{ path('solutions_status') }}">{{ 'status'|trans }}</a></li>
                         <li{{ current_route == 'problem_list' ? ' class="active"' : '' }}><a href="{{ path('problem_list') }}">{{ 'problems'|trans }}</a></li>
                     </ul>
                 </li>
