@@ -163,7 +163,7 @@ class ApiController extends AbstractController
 
                 if (
                     null === $subVerdict
-                    && strcmp(trim($output), trim($test->getOutput()) === 0)
+                    &&  0 === strcmp(trim($output), trim($test->getOutput()))
                 ) {
                     $subVerdict = 'AC';
                     $acceptedCount++;
