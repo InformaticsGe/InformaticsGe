@@ -43,5 +43,7 @@ $('#problem-solution-form-submit').on('click', function () {
       cache: false,
    });
 
-   $(location).attr('href', statusPageUrl);
+   setTimeout(function() {
+      $(location).attr('href', statusPageUrl);
+   }, 500);
 });

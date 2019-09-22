@@ -13,10 +13,11 @@ class CompilerService
      *
      * @param string $language
      * @param string $code
+     * @param int $timeLimit
      *
      * @return AbstractCompiler|array
      */
-    public function getCompiler(string $language, string $code)
+    public function getCompiler(string $language, string $code, int $timeLimit)
     {
         // Map compiler language to compiler class.
         $compilerClassesMapping = [
@@ -57,12 +58,13 @@ class CompilerService
         if (is_array($compilerClassesMapping[$language])) {
             $compilerClass = '\\App\\Compiler\\' . $compilerClassesMapping[$language]['class'];
             $compilerObj = new $compilerClass(
-                $code, 10,
+                $code,
+                $timeLimit,
                 $compilerClassesMapping[$language]['additionalData']
             );
         } else {
             $compilerClass = '\\App\\Compiler\\' . $compilerClassesMapping[$language];
-            $compilerObj = new $compilerClass($code, 10);
+            $compilerObj = new $compilerClass($code, $timeLimit);
         }
 
         return $compilerObj;

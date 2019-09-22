@@ -43,7 +43,7 @@ class ApiController extends AbstractController
         }
 
         // Create new compiler object.
-        $compiler = $compilerService->getCompiler($language, $code);
+        $compiler = $compilerService->getCompiler($language, $code, 10);
 
         // Compile and execute code.
         $compiler
@@ -100,7 +100,7 @@ class ApiController extends AbstractController
             $code = $request->get('code');
 
             // Create new compiler and compile code.
-            $compiler = $compilerService->getCompiler($language, $code);
+            $compiler = $compilerService->getCompiler($language, $code, $problem->getTimeLimit());
             $compiler->compile();
 
             $doctrine = $this->getDoctrine();
