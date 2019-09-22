@@ -1,7 +1,7 @@
 {#
 /**
   * @file
-  * Template for Problem solution page.
+  * Template for Problem submission page.
   *
   * Available variables:
   * - current_route: Name of current route.
@@ -109,7 +109,11 @@
             } %}
 
             <tr class="{{ status_mapping[submission.verdict].class }}">
-                <td>{{ submission.id }}</td>
+                <td>
+                    <a href="{{ path('single_submission', { id: submission.id }) }}">
+                        {{ submission.id }}
+                    </a>
+                </td>
                 <td>
                     <a href="{{ path('user_profile', { username: submission.user }) }}">
                         {{ submission.user }}
@@ -121,9 +125,21 @@
                     </a>
                 </td>
                 <td>{{ submission.language }}</td>
-                <td>{{ status_mapping[submission.verdict].status|trans }}</td>
-                <td>{{ submission_percentage|round(2) }} %</td>
-                <td>{{ submission.createdAt|date('d.m.Y h:i:s') }}</td>
+                <td>
+                    <a href="{{ path('single_submission', { id: submission.id }) }}">
+                        {{ status_mapping[submission.verdict].status|trans }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('single_submission', { id: submission.id }) }}">
+                        {{ submission_percentage|round(2) }} %
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('single_submission', { id: submission.id }) }}">
+                        {{ submission.createdAt|date('d.m.Y h:i:s') }}
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

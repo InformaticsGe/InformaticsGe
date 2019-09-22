@@ -91,7 +91,7 @@ class ProblemController extends AbstractController
     }
 
     /**
-     * show last solutions page.
+     * show last submission page.
      *
      * @param ProblemSubmissionRepository $submissionRepository
      *
@@ -103,6 +103,27 @@ class ProblemController extends AbstractController
 
         return $this->render('problem/submissions.html.twig', [
            'submissions' => $submissions,
+        ]);
+    }
+
+    /**
+     * Show single submission page.
+     *
+     * @param $id
+     * @param ProblemSubmissionRepository $repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function singleSubmission($id, ProblemSubmissionRepository $repository)
+    {
+        $submission = $repository->find($id);
+
+        if (null == $submission) {
+            throw new NotFoundHttpException($this->_translator->trans('submission_not_found', ['%submission_id%' => $id]));
+        }
+
+        return $this->render('problem/submission.html.twig', [
+            'submission' => $submission,
         ]);
     }
 }

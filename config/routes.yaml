@@ -175,3 +175,12 @@ solutions_status:
   requirements:
     _locale:  ka|en
     id: \d+
+
+single_submission:
+  path: /{_locale}/status/submission/{id}
+  controller: App\Controller\ProblemController::singleSubmission
+  defaults:
+    _locale: ka
+  requirements:
+    _locale:  ka|en
+    id: \d+
