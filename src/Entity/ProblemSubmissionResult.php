@@ -64,24 +64,24 @@ class ProblemSubmissionResult
         return $this;
     }
 
-    public function getTime(): ?int
+    public function getTime(): ?float
     {
         return $this->time;
     }
 
-    public function setTime(int $time): self
+    public function setTime(float $time): self
     {
         $this->time = $time;
 
         return $this;
     }
 
-    public function getMemory(): ?int
+    public function getMemory(): ?float
     {
         return $this->memory;
     }
 
-    public function setMemory(int $memory): self
+    public function setMemory(float $memory): self
     {
         $this->memory = $memory;
 
