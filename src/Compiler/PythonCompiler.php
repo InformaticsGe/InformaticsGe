@@ -9,19 +9,17 @@ final class PythonCompiler extends AbstractCompiler
      * PythonCompiler constructor.
      *
      * @param string $code
-     * @param string $inputData
      * @param $timeLimit
      * @param $additionalData
      */
     public function __construct(
         string $code,
-        string $inputData,
         $timeLimit,
         $additionalData
     ) {
         $timeLimit *= 2;
 
-        parent::__construct($code, $inputData, $timeLimit);
+        parent::__construct($code, $timeLimit);
 
         $pythonVersion = $additionalData['version'];
 
@@ -47,9 +45,9 @@ final class PythonCompiler extends AbstractCompiler
     /**
      * @inheritDoc
      */
-    public function execute(): AbstractCompiler
+    public function execute($inputData): AbstractCompiler
     {
-        $execute = parent::execute();
+        $execute = parent::execute($inputData);
 
         // Get error.
         $this->errorOutput = file_get_contents(

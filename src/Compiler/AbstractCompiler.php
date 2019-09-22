@@ -31,13 +31,11 @@ class AbstractCompiler
      * AbstractCompiler constructor.
      *
      * @param $code
-     * @param $inputData
      * @param $timeLimit
      */
-    public function __construct($code, $inputData, $timeLimit)
+    public function __construct($code, $timeLimit)
     {
         $this->code = $code;
-        $this->inputData = $inputData;
         $this->timeLimit = $timeLimit;
 
         // Set path to compilation directory.
@@ -57,9 +55,8 @@ class AbstractCompiler
      */
     public function compile(): self
     {
-        // Put code and input data to files.
+        // Put code to file.
         file_put_contents($this->directory . '/' . $this->codeFilename, $this->code);
-        file_put_contents($this->directory . '/' . $this->inputFilename, $this->inputData);
 
         // Compile code.
         exec('cd ' . $this->directory . ' && ' . $this->compileCommand);
@@ -81,10 +78,17 @@ class AbstractCompiler
     /**
      * Execute binary file or run script.
      *
+     * @param $inputData
+     *
      * @return AbstractCompiler
      */
-    public function execute(): self
+    public function execute($inputData): self
     {
+        $this->inputData = $inputData;
+
+        // Put input data to file.
+        file_put_contents($this->directory . '/' . $this->inputFilename, $this->inputData);
+
         if (!$this->compiled) {
             $this->executionOutput = '';
             $this->executionTime = 0.00;

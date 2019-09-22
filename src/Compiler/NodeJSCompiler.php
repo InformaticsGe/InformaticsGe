@@ -9,14 +9,13 @@ final class NodeJSCompiler extends AbstractCompiler
      * NodeJSCompiler constructor.
      *
      * @param string $code
-     * @param string $inputData
      * @param $timeLimit
      */
-    public function __construct(string $code, string $inputData, $timeLimit)
+    public function __construct(string $code, $timeLimit)
     {
         $timeLimit *= 2;
 
-        parent::__construct($code, $inputData, $timeLimit);
+        parent::__construct($code, $timeLimit);
 
         $this->codeFilename = 'main.js';
         $this->executeCommand = 'timeout ' . $this->timeLimit . 's node ' .
@@ -40,9 +39,9 @@ final class NodeJSCompiler extends AbstractCompiler
     /**
      * @inheritDoc
      */
-    public function execute(): AbstractCompiler
+    public function execute($inputData): AbstractCompiler
     {
-        $execute = parent::execute();
+        $execute = parent::execute($inputData);
 
         // Get error.
         $this->errorOutput = file_get_contents(

@@ -59,3 +59,8 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin.label.material_algorithm, group: admin.group.material }
 
+    admin.problem:
+        class: App\Admin\ProblemAdmin
+        arguments: [~, App\Entity\Problem, App\Controller\ProblemAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.problem, group: admin.group.activity }

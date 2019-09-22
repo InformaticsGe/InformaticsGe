@@ -1,0 +1,147 @@
+{#
+/**
+  * @file
+  * Template for Problem submission page.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_path: Current URL (Path).
+  * - current_locale: Current language code.
+  * - submissions: Array of problems submission entities.
+  */
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'status'|trans }}{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#problem_solutions').DataTable({
+                "autoWidth": false,
+                "responsive": true,
+                "lengthMenu": [[50, 100, 150, -1], [50, 100, 150, "{{ 'datatable_all'|trans }}"]],
+                "order": [[ 0, "desc" ]],
+                "language": {
+                    "lengthMenu": "{{ 'datatable_length_menu'|trans({'%type%': 'submission'|trans }) }}",
+                    "search": "{{ 'datatable_search'|trans({'%type%': 'submission'|trans }) }}",
+                    "sInfo": "{{ 'datatable_info'|trans }}",
+                    "sInfoEmpty": "{{ 'datatable_info_empty'|trans }}",
+                    "sInfoFiltered": "{{ 'datatable_filtered'|trans }}",
+                    "zeroRecords": "{{ 'datatable_zero_record'|trans }}",
+                    "paginate": {
+                        "previous": "{{ 'datatable_previous'|trans }}",
+                        "next": "{{ 'datatable_next'|trans }}"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="header-section text-center">
+        <h2>{{ 'problem_submissions_status'|trans }}</h2>
+        <p>{{ 'problem_submissions_status_description'|trans }}</p>
+        <hr class="bottom-line">
+    </div>
+
+    <table class="table tablelink table-striped table-bordered table-responsive" id="problem_solutions">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>{{ 'user'|trans }}</th>
+            <th>{{ 'problem'|trans }}</th>
+            <th>{{ 'language'|trans }}</th>
+            <th>{{ 'status'|trans }}</th>
+            <th>%</th>
+            <th>{{ 'date'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for submission in submissions %}
+            {% set accepted_tests_count = submission.acceptedTestsCount() %}
+            {% set tests_count = submission.problem.testsCount %}
+
+            {% set submission_percentage = 0.0 %}
+            {% if 0 not in [tests_count, accepted_tests_count] %}
+                {% set submission_percentage = accepted_tests_count / tests_count * 100 %}
+            {% endif %}
+
+            {% if 50 < submission_percentage %}
+                {% set wrong_answer_class = 'warning' %}
+            {% else %}
+                {% set wrong_answer_class = 'danger' %}
+            {% endif %}
+            {% set status_mapping = {
+                CRTDN: {
+                    class: 'info',
+                    status: 'testing'
+                },
+                AC: {
+                    class: 'success',
+                    status: 'accepted'
+                },
+                WA: {
+                    class: wrong_answer_class,
+                    status: 'wrong_answer'
+                },
+                TLE: {
+                    class: 'danger',
+                    status: 'time_limit'
+                },
+                MLE: {
+                    class: 'danger',
+                    status: 'memory_limit'
+                },
+                CE: {
+                    class: 'danger',
+                    status: 'compilation_error'
+                }
+            } %}
+
+            <tr class="{{ status_mapping[submission.verdict].class }}">
+                <td>
+                    <a href="{{ path('single_submission', { id: submission.id }) }}">
+                        {{ submission.id }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('user_profile', { username: submission.user }) }}">
+                        {{ submission.user }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('single_problem', { id: submission.problem.id }) }}">
+                        {{ submission.problem.title }}
+                    </a>
+                </td>
+                <td>{{ submission.language }}</td>
+                <td>
+                    <a href="{{ path('single_submission', { id: submission.id }) }}">
+                        {{ status_mapping[submission.verdict].status|trans }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('single_submission', { id: submission.id }) }}">
+                        {{ submission_percentage|round(2) }} %
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('single_submission', { id: submission.id }) }}">
+                        {{ submission.createdAt|date('d.m.Y h:i:s') }}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

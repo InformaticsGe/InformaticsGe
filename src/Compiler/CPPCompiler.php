@@ -9,12 +9,11 @@ final class CPPCompiler extends AbstractCompiler
      * CPPCompiler constructor.
      *
      * @param string $code
-     * @param string $inputData
      * @param $timeLimit
      */
-    public function __construct(string $code, string $inputData, $timeLimit)
+    public function __construct(string $code, $timeLimit)
     {
-        parent::__construct($code, $inputData, $timeLimit);
+        parent::__construct($code, $timeLimit);
 
         $this->executable = 'main.out';
         $this->codeFilename = 'main.cpp';

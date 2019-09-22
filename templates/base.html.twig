@@ -80,6 +80,20 @@
                     <a href="{{ url('material_index') }}">{{ 'materials'|trans }}</a></li>
                 <li class="{{ current_route == 'compiler' ? 'active' : '' }}">
                     <a href="{{ url('compiler') }}">{{ 'compiler'|trans }}</a></li>
+                <li class="dropdown">
+                    <a href="#"
+                       class="dropdown-toggle{{ current_route in ['problem_list', 'solutions_status'] ? ' active-link' : '' }}"
+                       data-toggle="dropdown"
+                       role="button"
+                       aria-haspopup="true"
+                       aria-expanded="false">
+                        {{ 'archive'|trans }} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li{{ current_route == 'solutions_status' ? ' class="active"' : '' }}><a href="{{ path('solutions_status') }}">{{ 'status'|trans }}</a></li>
+                        <li{{ current_route == 'problem_list' ? ' class="active"' : '' }}><a href="{{ path('problem_list') }}">{{ 'problems'|trans }}</a></li>
+                    </ul>
+                </li>
                 <li class="{{ current_route == 'about' ? 'active' : '' }}"><a
                             href="{{ url('about') }}">{{ 'we'|trans }}</a></li>
 

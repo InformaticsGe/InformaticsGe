@@ -1,0 +1,98 @@
+{#
+/**
+  * @file
+  * Template for Problems listing page.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_path: Current URL (Path).
+  * - current_locale: Current language code.
+  * - problems: Array of visible problems.
+  */
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'problems_archive'|trans }}{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#material_problems').DataTable({
+                "autoWidth": false,
+                "responsive": true,
+                "lengthMenu": [[50, 100, 150, -1], [50, 100, 150, "{{ 'datatable_all'|trans }}"]],
+                "order": [],
+                "language": {
+                    "lengthMenu": "{{ 'datatable_length_menu'|trans({'%type%': 'problem'|trans }) }}",
+                    "search": "{{ 'datatable_search'|trans({'%type%': 'problem'|trans }) }}",
+                    "sInfo": "{{ 'datatable_info'|trans }}",
+                    "sInfoEmpty": "{{ 'datatable_info_empty'|trans }}",
+                    "sInfoFiltered": "{{ 'datatable_filtered'|trans }}",
+                    "zeroRecords": "{{ 'datatable_zero_record'|trans }}",
+                    "paginate": {
+                        "previous": "{{ 'datatable_previous'|trans }}",
+                        "next": "{{ 'datatable_next'|trans }}"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="header-section text-center">
+        <h2>{{ 'problems_archive'|trans }}</h2>
+        <p>{{ 'problems_archive_description'|trans }}</p>
+        <hr class="bottom-line">
+    </div>
+
+    <table class="table tablelink table-striped table-bordered table-responsive" id="material_problems">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>{{ 'title'|trans }}</th>
+            <th>{{ 'source'|trans }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for problem in problems %}
+            <tr>
+                <td>
+                    <a href="{{ path('single_problem', { id: problem.id }) }}">{{ problem.id }}</a>
+                </td>
+                <td>
+                    <a href="{{ path('single_problem', { id: problem.id }) }}">{{ problem.title }}</a>
+
+                    {% if problem.tags is not empty %}
+                        <span class="row-tags">
+                            {% for tag in problem.tags|split(',') %}
+                            <a href="#">
+                                {{ tag }}</a>{{ not loop.last ? ', ' : '' }}
+                            {% endfor %}
+                        </span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if problem.sourceTitle is not null
+                        and problem.sourceTitle is not empty %}
+                        <a href="{{ problem.sourceUrl }}" target="_blank">{{ problem.sourceTitle }}</a>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('solve_problem', { id: problem.id }) }}" title="{{ 'solve'|trans }}"><i class="fa fa-send"></i></a>
+                    <a href="#" title="{{ 'stare'|trans }}"><i class="fa fa-star"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

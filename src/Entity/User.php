@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use DateTime;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -101,12 +103,18 @@ class User implements UserInterface
      */
     private $city;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProblemSubmission", mappedBy="user", orphanRemoval=true)
+     */
+    private $problemSubmissions;
+
     public function __construct()
     {
         $this->avatar = 'avatar1.png';
         $this->registrationDate = new DateTime();
         $this->verified = false;
         $this->active = true;
+        $this->problemSubmissions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -342,6 +350,37 @@ class User implements UserInterface
     public function setCity(?string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProblemSubmission[]
+     */
+    public function getProblemSubmissions(): Collection
+    {
+        return $this->problemSubmissions;
+    }
+
+    public function addProblemSubmission(ProblemSubmission $problemSubmission): self
+    {
+        if (!$this->problemSubmissions->contains($problemSubmission)) {
+            $this->problemSubmissions[] = $problemSubmission;
+            $problemSubmission->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProblemSubmission(ProblemSubmission $problemSubmission): self
+    {
+        if ($this->problemSubmissions->contains($problemSubmission)) {
+            $this->problemSubmissions->removeElement($problemSubmission);
+            // set the owning side to null (unless already changed)
+            if ($problemSubmission->getUser() === $this) {
+                $problemSubmission->setUser(null);
+            }
+        }
 
         return $this;
     }

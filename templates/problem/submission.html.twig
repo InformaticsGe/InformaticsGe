@@ -1,0 +1,167 @@
+{#
+/**
+  * @file
+  * Template for Problem single submission page.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_path: Current URL (Path).
+  * - current_locale: Current language code.
+  * - submission: Problem submission entity.
+  */
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'status'|trans }}{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script>
+        $(document).ready(function () {
+            const editorModes = {
+                'cpp':  'c_cpp',
+                'c_sharp': 'csharp',
+                'python2': 'python',
+                'python3': 'python',
+                'node_js': 'javascript',
+                'free_pascal': 'pascal'
+            };
+
+            let submissionLanguage = '{{ submission.language }}';
+            let editorMode = submissionLanguage;
+            if (submissionLanguage in editorModes) {
+                editorMode = editorModes[submissionLanguage];
+            }
+
+            let submissionEditor = ace.edit("submission-editor");
+            submissionEditor.setTheme("ace/theme/chrome");
+            submissionEditor.session.setMode("ace/mode/" + editorMode);
+            submissionEditor.setReadOnly(true);
+            submissionEditor.setOptions({
+                maxLines: Infinity
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    {% set status_mapping = {
+        CRTDN: 'testing',
+        AC: 'accepted',
+        WA: 'wrong_answer',
+        TLE: 'time_limit',
+        MLE: 'memory_limit',
+        CE: 'compilation_error'
+    } %}
+
+    {% set accepted_tests_count = submission.acceptedTestsCount() %}
+    {% set tests_count = submission.problem.testsCount %}
+
+    {% set submission_percentage = 0.0 %}
+    {% if 0 not in [tests_count, accepted_tests_count] %}
+        {% set submission_percentage = accepted_tests_count / tests_count * 100 %}
+    {% endif %}
+
+    <div class="header-section text-center">
+        <h2>{{ 'problem_submissions_status'|trans }}</h2>
+        <p>{{ 'problem_submissions_status_description'|trans }}</p>
+        <hr class="bottom-line">
+    </div>
+
+    <div class="col-sm-12">
+        <p>
+            {{ 'submission_date'|trans }}:
+            <b>{{ submission.createdAt|date('d.m.Y h:i:s') }}</b>
+        </p>
+        <p>
+            {{ 'problem'|trans }}:
+            <a href="{{ path('single_problem', { id: submission.problem.id }) }}">{{ submission.problem.title }}</a>
+        </p>
+        <p>
+            {{ 'user'|trans }}:
+            <a href="{{ path('user_profile', { username: submission.user }) }}">{{ submission.user }}</a>
+        </p>
+        <p>{{ 'verdict'|trans }}: <b>{{ status_mapping[submission.verdict]|trans }}</b></p>
+        <p>
+            {% if submission_percentage > 90 %}
+                {% set percentage_badge_class = 'success' %}
+            {% elseif submission_percentage <= 90 and submission_percentage > 30 %}
+                {% set percentage_badge_class = 'warning' %}
+            {% else %}
+                {% set percentage_badge_class = 'danger' %}
+            {% endif %}
+
+            {{ 'percentage'|trans }}:
+            <span class="badge badge-{{ percentage_badge_class }}">{{ submission_percentage|round(2) }} %</span>
+        </p>
+
+        <!-- FB Buttons -->
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <div class="fb-save"
+                     data-uri="{{ current_path }}"
+                     data-size="large"></div>
+                <br /><br />
+            </div>
+
+            <div class="col-sm-12">
+                <div class="fb-like"
+                     data-href="{{ current_path }}"
+                     data-layout="standard"
+                     data-action="like"
+                     data-size="small"
+                     data-show-faces="true"
+                     data-share="true"></div>
+                <br /><br />
+            </div>
+        </div>
+        <!--/ FB Buttons -->
+
+        <pre id="submission-editor">{{ submission.code }}</pre>
+
+        {% if 'CE' == submission.verdict %}
+            <pre>{{ submission.results[0].error ?? status_mapping['CE']|trans }}</pre>
+        {% else %}
+            <h3>{{ 'tests'|trans }}</h3>
+            <div class="panel-group" id="tests-accordion">
+                {% set test_counter = 0 %}
+                {% for result in submission.results %}
+                    {% set test = submission.problem.tests[test_counter] %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#tests-accordion" href="#test-{{ test_counter }}">
+                                    {{ 'test_number'|trans({'%number%': test_counter + 1 }) }} -
+                                    {{ 'time'|trans({'%time%': result.time }) }};
+                                    {{ 'memory'|trans({'%memory%': result.memory }) }};
+                                    {{ 'verdict'|trans }}: {{ status_mapping[result.verdict]|trans }}
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="test-{{ test_counter }}" class="panel-collapse collapse{{ loop.first ? ' in' : '' }}">
+                            <div class="panel-body">
+                                <div class="col-md-12">
+                                    <h5>{{ 'input_data'|trans }}</h5>
+                                    <pre>{{ test.input }}</pre>
+                                </div>
+                                <div class="col-md-12">
+                                    <h5>{{ 'output_data'|trans }}</h5>
+                                    <pre>{{ test.output }}</pre>
+                                </div>
+                                <div class="col-md-12">
+                                    <h5>{{ 'your_answer'|trans }}</h5>
+                                    <pre>{{ result.output }}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% set test_counter = test_counter + 1 %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

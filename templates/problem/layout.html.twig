@@ -1,0 +1,50 @@
+{#
+/**
+  * @file
+  * Leyout for problem pages.
+  *
+  * Available variables:
+  * - current_route: Name of current route.
+  * - current_path: Current URL (Path).
+  * - current_locale: Current language code.
+  */
+#}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ProblemNavbar">
+                    <span class="sr-only">მენიუ</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="ProblemNavbar">
+                <ul class="nav navbar-nav navbar-left">
+                    <li{{ current_route == 'single_problem' ? ' class="active"' : '' }}>
+                        <a href="{{ path('single_problem', { id: problem.id }) }}" >{{ 'problem'|trans }}</a>
+                    </li>
+                    <li><a href="#">{{ 'solutions'|trans }}</a></li>
+                    <li{{ current_route == 'solve_problem' ? ' class="active"' : '' }}>
+                        <a href="{{ path('solve_problem', { id: problem.id }) }}">{{ 'solve'|trans }}</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ 'analyses'|trans }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">{{ 'all_analyses'|trans }}</a></li>
+                            <li><a href="#">{{ 'add_analyse'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" >{{ 'comments'|trans }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block problem_body %}
+    {% endblock %}
+{% endblock %}

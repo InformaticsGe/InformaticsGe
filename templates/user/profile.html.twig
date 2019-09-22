@@ -31,7 +31,8 @@
                     <h3>
                         {{ user.firstName ~ ' ' ~ user.lastName }}
 
-                        {% if app.user.username == user.username %}
+                        {% if app.user.username is defined and
+                            app.user.username == user.username %}
                             <a href="{{ path('edit_profile') }}"><span class="glyphicon glyphicon-pencil"></span></a>
                         {% endif %}
                     </h3>
