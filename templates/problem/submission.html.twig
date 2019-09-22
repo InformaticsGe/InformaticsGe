@@ -66,8 +66,8 @@
     {% endif %}
 
     <div class="header-section text-center">
-        <h2>ამოხსნების სტატუსი</h2>
-        <p>ამ გვერდზე თქვენ იხილავთ გაგზავნილი ამოხსნების სტატუსს.</p>
+        <h2>{{ 'problem_submissions_status'|trans }}</h2>
+        <p>{{ 'problem_submissions_status_description'|trans }}</p>
         <hr class="bottom-line">
     </div>
 
@@ -134,9 +134,9 @@
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#tests-accordion" href="#test-{{ test_counter }}">
-                                    {{ 'test_number'|trans({'%number%': test_counter + 1 }) }}
-                                    {{ 'time'|trans({'%time%': result.time }) }}
-                                    {{ 'memory'|trans({'%time%': result.memory }) }}
+                                    {{ 'test_number'|trans({'%number%': test_counter + 1 }) }} -
+                                    {{ 'time'|trans({'%time%': result.time }) }};
+                                    {{ 'memory'|trans({'%memory%': result.memory }) }};
                                     {{ 'verdict'|trans }}: {{ status_mapping[result.verdict]|trans }}
                                 </a>
                             </h4>

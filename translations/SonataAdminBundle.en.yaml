@@ -3,6 +3,7 @@ admin:
     user: 'User'
     content: 'Content'
     material: 'Material'
+    activity: 'Activity'
   label:
     users: 'Users'
     roles: 'Roles'

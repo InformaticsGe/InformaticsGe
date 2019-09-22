@@ -3,6 +3,7 @@ admin:
     user: 'მომხმარებელი'
     content: 'კონტენტი'
     material: 'მასალა'
+    activity: 'აქტივობა'
   label:
     users: 'მომხმარებელი'
     roles: 'როლები'
