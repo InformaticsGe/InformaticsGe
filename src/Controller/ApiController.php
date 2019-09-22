@@ -139,18 +139,17 @@ class ApiController extends AbstractController
                     ->setMemory($memory)
                     ->setOutput($output);
 
-                $subVerdict = null;
-
                 if ($compiler->isError()) {
-                    $subVerdict = 'CE';
                     $result->setError($compiler->getError());
                     $isCE = true;
+                    $result->setVerdict('CE');
+                    $submission->addResult($result);
+                    break;
                 }
 
-                if (
-                    null === $subVerdict
-                    && $time > $problem->getTimeLimit()
-                ) {
+                $subVerdict = null;
+
+                if ($time > $problem->getTimeLimit()) {
                     $subVerdict = 'TLE';
                     $isTLE = true;
                 }
@@ -179,15 +178,16 @@ class ApiController extends AbstractController
                 $submission->addResult($result);
             }
 
-            $verdict = 'WA';
-            if ($acceptedCount == $problemTests->count()) {
-                $verdict = 'AC';
-            } else if ($isCE) {
+            if ($isCE) {
                 $verdict = 'CE';
             } else if ($isTLE) {
                 $verdict = 'TLE';
             } else if ($isMLE) {
                 $verdict = 'MLE';
+            } else if ($acceptedCount == $problemTests->count()) {
+                $verdict = 'AC';
+            } else {
+                $verdict = 'WA';
             }
 
             // Update with results.
